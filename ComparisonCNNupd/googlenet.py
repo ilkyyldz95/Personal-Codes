@@ -61,7 +61,7 @@ def create_googlenet(no_classes=3, no_features=None):
                                            name='inception_3a/pool_proj', W_regularizer=l2(0.0002))(inception_3a_pool)
 
     inception_3a_output = merge([inception_3a_1x1, inception_3a_3x3, inception_3a_5x5, inception_3a_pool_proj],
-                                mode='concat', concat_axis=-1, name='inception_3a/output')
+                                mode='concat', concat_axis=1, name='inception_3a/output')
 
     inception_3b_1x1 = Convolution2D(128, 1, 1, border_mode='same', activation='relu', name='inception_3b/1x1',
                                      W_regularizer=l2(0.0002))(inception_3a_output)
@@ -87,7 +87,7 @@ def create_googlenet(no_classes=3, no_features=None):
                                            name='inception_3b/pool_proj', W_regularizer=l2(0.0002))(inception_3b_pool)
 
     inception_3b_output = merge([inception_3b_1x1, inception_3b_3x3, inception_3b_5x5, inception_3b_pool_proj],
-                                mode='concat', concat_axis=-1, name='inception_3b/output')
+                                mode='concat', concat_axis=1, name='inception_3b/output')
 
     inception_3b_output_zero_pad = ZeroPadding2D(padding=(1, 1))(inception_3b_output)
 
@@ -118,7 +118,7 @@ def create_googlenet(no_classes=3, no_features=None):
                                            name='inception_4a/pool_proj', W_regularizer=l2(0.0002))(inception_4a_pool)
 
     inception_4a_output = merge([inception_4a_1x1, inception_4a_3x3, inception_4a_5x5, inception_4a_pool_proj],
-                                mode='concat', concat_axis=-1, name='inception_4a/output')
+                                mode='concat', concat_axis=1, name='inception_4a/output')
 
     loss1_ave_pool = AveragePooling2D(pool_size=(5, 5), strides=(3, 3), name='loss1/ave_pool')(inception_4a_output)
 
@@ -345,7 +345,7 @@ if __name__ == "__main__":
     parser.add_argument('-o', '--out-file', dest='out')
 
     args = parser.parse_args()'''
-    googlenet = create_googlenet(no_classes=3, no_features=1024)
+    googlenet = create_googlenet(no_classes=1, no_features=1024)
 
     with open("googlenet.json", 'w') as arch:
         arch.writelines(googlenet.to_json())

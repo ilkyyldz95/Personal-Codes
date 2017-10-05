@@ -25,7 +25,7 @@ def BTLoss(y_true, y_pred):
 
 # INITIALIZE PARAMETERS
 # size of image
-input_dim = 784
+input_dim = (3,224,224)
 epochs = 10
 batch_size = 1
 

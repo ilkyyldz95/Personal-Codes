@@ -24,7 +24,7 @@ def create_network(F, hid_layer_dim):
     return [net_plus,net_pre_plus,net_normal]
 
 # INITIALIZE PARAMETERS
-hid_layer_dim = 10 # 1 for James' code: score
+hid_layer_dim = 1 # 1 for James' code: score
 epochs = 10
 batch_size = 1
 

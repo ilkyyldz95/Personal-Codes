@@ -8,7 +8,7 @@ from ..utils.image import create_generator
 from ComparisonCNNupd.googlenet import create_googlenet
 
 class RetiNet(object):
-    def __init__(self, train_data, val_data, loss, optimizer, batch_size = 32, no_of_classes = 3, no_of_features = 1024, epochs = 50):
+    def __init__(self, train_data, val_data, loss, optimizer, batch_size = 32, no_of_classes = 1, no_of_features = 1024, epochs = 50):
         self.train_data = train_data
         self.val_data = val_data
         self.no_of_classes = no_of_classes
@@ -89,7 +89,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Instantiate model and train
-    r = RetiNet(train_data, val_data, loss, optimizer, batch_size = 32, no_of_classes = 3, no_of_features = 1024, epochs = 50)
+    r = RetiNet(train_data, val_data, loss, optimizer, batch_size = 32, no_of_classes = 1, no_of_features = 1024, epochs = 50)
     r.train()
     data_dict = r.evaluate(args.data)
         # calculate_metrics(data_dict, out_dir=r.eval_dir)
