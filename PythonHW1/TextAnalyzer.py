@@ -27,12 +27,31 @@ if __name__ == "__main__":
 
 
     if args.mode=='TF':
-        # Read text file at args.input, compute TF of each term, 
+        # , compute TF of each term,
         # and store result in file args.output. All terms are first converted to
         # lowercase, and have non alphabetic characters removed
         # (i.e., 'Ba,Na:Na.123' and 'banana' count as the same term). Empty strings, i.e., "" 
         # are also removed
-        pass
+
+        # Read text file at args.input
+        F = sc.textFile(args.input)
+        # Separate each word
+        sep_word = F.flatMap(lambda line: line.lower().split())
+
+        print
+        print
+        print '00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+        print sep_word.count()
+        # Keep alphabetic characters
+        alpha_word = sep_word.map(stripNonAlpha)
+
+        print alpha_word.count()
+
+        alpha_word = alpha_word.filter(lambda x: x != '')
+        al_tup = alpha_word.map(lambda x: (x, 1))
+        dist = al_tup.reduceByKey(lambda x, y: x+y)
+        dist.saveAsTextFile(args.output)
+
 
 
 
