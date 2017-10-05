@@ -1,16 +1,17 @@
 from keras.layers import Input, Dense, Convolution2D, MaxPooling2D, AveragePooling2D, ZeroPadding2D, Dropout, Flatten, \
     merge, Activation
-from keras.models import Model
+from keras.models import Model, model_from_json
 from keras.regularizers import l2
 from ComparisonCNNupd.googlenet_custom_layers import PoolHelper, LRN
-from os.path import join
-
+from PIL import Image
+import numpy as np
+import glob
 
 # https://gist.github.com/joelouismarino/a2ede9ab3928f999575423b9887abd14
-def create_googlenet(no_classes=3, no_features=None):
+def create_googlenet(no_classes=1, no_features=None):
     # creates GoogLeNet a.k.a. Inception v1 (Szegedy, 2015)
 
-    input = Input(shape=(3, 224, 224))
+    input = Input(shape=(3,224, 224))
 
     conv1_7x7_s2 = Convolution2D(64, 7, 7, subsample=(2, 2), border_mode='same', activation='relu', name='conv1/7x7_s2',
                                  W_regularizer=l2(0.0002))(input)
@@ -340,12 +341,59 @@ if __name__ == "__main__":
 
     '''from argparse import ArgumentParser
     parser = ArgumentParser()
-    parser.add_argument('-c', '--classes', dest='classes', default=3, type=int)
+    parser.add_argument('-c', '--classes', dest='classes', default=1, type=int)
     parser.add_argument('-f', '--features', dest='features', default=1024, type=int)
     parser.add_argument('-o', '--out-file', dest='out')
 
     args = parser.parse_args()'''
-    googlenet = create_googlenet(no_classes=1, no_features=1024)
+    # parameters
+    no_of_classes = 1
+    no_of_images = 196
+    no_of_training_images = 120
+    no_of_features = 1024
+    epochs = 50
+    batch_size = 32
+    loss = 'binary_crossentropy'
+    optimizer = 'sgd'
 
+    # create model
+    F = create_googlenet(no_classes=no_of_classes, no_features=no_of_features)
+
+    # load data, center part of 224*224
+    images = np.zeros((no_of_images,3,224,224))
+    count = 0
+    for filename in glob.glob('../ComparisonCNNupd/vessels/*.png'):
+        im = np.asarray(Image.open(filename).convert('L'))
+        images[count][:][:][:] = im[128:352,208:432]
+        count += 1
+
+    abs_labels = np.zeros((no_of_images,))
+    # 0 for normal, 1 for pp, 2 for p
+    abs_labels[:31] = 1
+    abs_labels[31:48] = 2
+    abs_labels[101:135] = 1
+    abs_labels[135:149] = 2
+
+    # shuffle the data
+    p = np.random.permutation(no_of_images)
+    for im in range(no_of_images):
+        images[im][:][:][:] = images[p[im]][:][:][:]
+        abs_labels[im] = abs_labels[p[im]]
+
+    # separate training and validation samples
+    train_im = images[:no_of_training_images][:][:][:]
+    train_label = abs_labels[:no_of_training_images]
+    val_im = images[no_of_training_images:][:][:][:]
+    val_label = abs_labels[no_of_training_images:]
+
+    # train
+    F.compile(optimizer=optimizer, loss=loss, metrics=['accuracy'])
+    input_shape = F.input_shape[1:]
+    F.fit(train_im, train_label, epochs=epochs, batch_size=batch_size)
+
+    # save model
     with open("googlenet.json", 'w') as arch:
-        arch.writelines(googlenet.to_json())
+        arch.writelines(F.to_json())
+    # serialize weights to HDF5
+    F.save_weights("googlenet.h5")
+    print("Saved model to disk")
