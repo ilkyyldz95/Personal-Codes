@@ -34,18 +34,20 @@ if __name__ == "__main__":
     sc = SparkContext(args.master, 'Text Analysis')
 
     if args.mode == 'TF':
-        # Read text file at args.input
-        F = sc.textFile(args.input, 20)
+        # Read without unicode
+        rdd = sc.wholeTextFiles(args.input, 20).values().map(lambda x: x.encode('ascii', 'ignore'))
+        # Concatenate all texts
+        txt = rdd.reduce(lambda x, y: x + y)
+        # Get rid of escape characters but do not lose spaces
+        F = sc.parallelize([txt]).map(lambda x: x.replace('\n', ' ')).map(lambda x: x.replace('\t', ' '))
+
         # Separate each word and turn to lower case
         sep_word = F.flatMap(lambda line: line.lower().split())
 
-        print '00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
-        print sep_word.count()
         # Keep alphabetic characters
         alpha_word = sep_word.map(stripNonAlpha)
         # Eliminate empty strings
         alpha_word = alpha_word.filter(lambda x: x != '')
-        print alpha_word.count()
 
         # Append 1s and count the number of occurrences of the same key
         al_tup = alpha_word.map(lambda x: (x, 1))
@@ -57,10 +59,13 @@ if __name__ == "__main__":
         # Read all text files at args.input, (filename, (term,val)) as a pairRDD
         # Read without unicode
         rdd = sc.wholeTextFiles(args.input, 20).values().map(lambda x: x.encode('ascii', 'ignore'))
+        # Concatenate all texts
         txt = rdd.reduce(lambda x, y: x + y)
-        # Separate tuples from new line
-        pairs = sc.parallelize([txt]).map(lambda x: x.replace('\n', '')).flatMap(lambda x: x.split(')')).filter(
-            lambda x: x != '').map(lambda x: eval(x + ')'))
+        # Get rid of escape characters
+        F = sc.parallelize([txt]).map(lambda x: x.replace('\n', '')).map(lambda x: x.replace('\t', ''))
+
+        # Separate tuples
+        pairs = F.flatMap(lambda x: x.split(')')).filter(lambda x: x != '').map(lambda x: eval(x + ')'))
         # Sort in descending order with respect to values and take top 20
         sorted20 = pairs.takeOrdered(20, lambda pair: -pair[1])
         # Return
