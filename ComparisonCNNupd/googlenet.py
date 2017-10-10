@@ -347,53 +347,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args()'''
     # parameters
-    no_of_classes = 1
-    no_of_images = 196
-    no_of_training_images = 120
+    no_of_classes = 1 # 1 scalar score
     no_of_features = 1024
-    epochs = 50
-    batch_size = 32
-    loss = 'binary_crossentropy'
-    optimizer = 'sgd'
 
     # create model
     F = create_googlenet(no_classes=no_of_classes, no_features=no_of_features)
-
-    # load data, center part of 224*224
-    images = np.zeros((no_of_images,3,224,224))
-    count = 0
-    for filename in glob.glob('../ComparisonCNNupd/vessels/*.png'):
-        im = np.asarray(Image.open(filename).convert('L'))
-        images[count][:][:][:] = im[128:352,208:432]
-        count += 1
-
-    abs_labels = np.zeros((no_of_images,))
-    # 0 for normal, 1 for pp, 2 for p
-    abs_labels[:31] = 1
-    abs_labels[31:48] = 2
-    abs_labels[101:135] = 1
-    abs_labels[135:149] = 2
-
-    # shuffle the data
-    p = np.random.permutation(no_of_images)
-    for im in range(no_of_images):
-        images[im][:][:][:] = images[p[im]][:][:][:]
-        abs_labels[im] = abs_labels[p[im]]
-
-    # separate training and validation samples
-    train_im = images[:no_of_training_images][:][:][:]
-    train_label = abs_labels[:no_of_training_images]
-    val_im = images[no_of_training_images:][:][:][:]
-    val_label = abs_labels[no_of_training_images:]
-
-    # train
-    F.compile(optimizer=optimizer, loss=loss, metrics=['accuracy'])
-    input_shape = F.input_shape[1:]
-    F.fit(train_im, train_label, epochs=epochs, batch_size=batch_size)
-
-    # save model
-    with open("googlenet.json", 'w') as arch:
-        arch.writelines(F.to_json())
-    # serialize weights to HDF5
-    F.save_weights("googlenet.h5")
-    print("Saved model to disk")
