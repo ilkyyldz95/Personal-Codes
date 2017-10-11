@@ -21,32 +21,24 @@ def create_network(F, hid_layer_dim, input_shape):
     ''' F&G concatenated
     3 parallel networks, with the same F and different Gs'''
 
-    # CREATE G
-    net_plus = Sequential()
-    net_plus.add(F)
-    net_plus.add(SigLayer(hid_layer_dim))
-
-    net_pre_plus = Sequential()
-    net_pre_plus.add(F)
-    net_pre_plus.add(GausLayer(hid_layer_dim))
-
-    net_normal = Sequential()
-    net_normal.add(F)
-    net_normal.add(InvSigLayer(hid_layer_dim))
-
+    shared_input = Input(shape=input_shape)
     # LOAD INITIAL WEIGHTS OF F INTO THE NEW MODEL
     for i in range(len(F.layers)):
-        net_plus.layers[0].layers[i].set_weights(F.layers[i].get_weights())
-        net_pre_plus.layers[0].layers[i].set_weights(F.layers[i].get_weights())
-        net_normal.layers[0].layers[i].set_weights(F.layers[i].get_weights())
+        F.layers[i].set_weights(F.layers[i].get_weights())
 
-    # Construct the whole model with 3 dimensional softmax output
-    processed_norm = net_normal(Input(shape=input_shape))
-    processed_pre = net_pre_plus(Input(shape=input_shape))
-    processed_plus = net_plus(Input(shape=input_shape))
+    f_out = F(shared_input)
+    # Create G
+    processed_plus = SigLayer(hid_layer_dim)(f_out)
+    processed_pre = GausLayer(hid_layer_dim)(f_out)
+    processed_norm = InvSigLayer(hid_layer_dim)(f_out)
 
-    concat_abs_net = Model(Input(shape=input_shape), [processed_norm, processed_pre, processed_plus])
-    concat_abs_net.add(Activation('softmax', input_shape = (3,)))
+    # Add 3 dimensional softmax output
+    activ_plus = Activation('softmax')(processed_plus)
+    activ_pre = Activation('softmax')(processed_pre)
+    activ_norm = Activation('softmax')(processed_norm)
+
+    # Create the whole network
+    concat_abs_net = Model(shared_input, [activ_norm, activ_pre, activ_plus])
 
     return concat_abs_net
 
