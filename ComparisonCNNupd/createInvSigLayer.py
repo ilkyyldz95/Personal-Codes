@@ -19,7 +19,7 @@ class InvSigLayer(Layer):
 
     def call(self, x):
         # 1 - 1/(1 + exp(-ax + b))
-        return K.pow(1+K.exp(-K.dot(x, self.a) + self.b), -1)
+        return 1 - K.pow(1+K.exp(-K.dot(x, self.a) + self.b), -1)
 
     def compute_output_shape(self, input_shape):
         return (input_shape[0], self.output_dim)

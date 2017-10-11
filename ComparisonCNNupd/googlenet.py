@@ -346,9 +346,9 @@ if __name__ == "__main__":
     parser.add_argument('-o', '--out-file', dest='out')
 
     args = parser.parse_args()'''
-    # parameters
+    '''# parameters
     no_of_classes = 1 # 1 scalar score
     no_of_features = 1024
 
     # create model
-    F = create_googlenet(no_classes=no_of_classes, no_features=no_of_features)
+    F = create_googlenet(no_classes=no_of_classes, no_features=no_of_features)'''
