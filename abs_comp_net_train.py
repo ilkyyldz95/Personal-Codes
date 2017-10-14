@@ -26,7 +26,6 @@ def BTLoss(y_true, y_pred):
 hid_layer_dim = 1 #score
 input_shape = (3,224,224)
 no_of_images = 196
-no_of_test_images = 10
 no_of_features = 1024
 epochs = 10
 batch_size = 1

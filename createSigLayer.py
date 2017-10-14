@@ -1,5 +1,6 @@
 from keras import backend as K
 from keras.engine.topology import Layer
+import numpy as np
 
 '''G for plus disease'''
 class SigLayer(Layer):
@@ -21,7 +22,7 @@ class SigLayer(Layer):
     def call(self, x):
         # 1/(1 + exp(-ax + b))
         # Dot: matrix multiplication
-        return K.pow(1+K.exp(-K.dot(x, self.a) + self.b), -1)
+        return K.pow(1+K.exp(-K.dot(x, self.a) + np.repeat(self.b, x.shape[0], axis=0)), -1)
 
     def compute_output_shape(self, input_shape):
         return (input_shape[0], self.output_dim)

@@ -2,6 +2,7 @@ from keras import backend as K
 from keras.engine.topology import Layer
 import numpy as np
 from theano.tensor import tensordot
+from constraints import *
 
 '''G for pre-plus disease'''
 class GausLayer(Layer):
@@ -15,7 +16,7 @@ class GausLayer(Layer):
         self.mu = self.add_weight(name='mean', shape=(1, input_shape[1]), initializer='uniform',
                                  trainable=True)
         self.var = self.add_weight(name='variance', shape=(1, self.output_dim), initializer='uniform',
-                                 trainable=True)
+                                 trainable=True, constraint=PosVal())
         # Create a trainable weight variable for this layer.
         self.trainable_weights = [self.mu, self.var]
         super(GausLayer, self).build(input_shape)  # built=true
@@ -23,7 +24,10 @@ class GausLayer(Layer):
     def call(self, x):
         # Gaussian with mu and var
         # *: elementwise
-        return K.exp(-(tensordot(x - self.mu,(x - self.mu),1) * K.pow(2 * self.var, -1))) * K.pow((2 * np.pi * self.var), -0.5)
+        '''return K.exp(-(tensordot(x - self.mu, (x - self.mu), 1) * \
+                       K.pow(2 * self.var, -1))) * K.pow((2 * np.pi * self.var), -0.5)'''
+        return K.exp(-(np.repeat(tensordot(x - self.mu, (x - self.mu), 1), x.shape[0], axis=0) * \
+                       K.pow(2 * self.var, -1))) * K.pow((2 * np.pi * self.var), -0.5)
 
     def compute_output_shape(self, input_shape):
         return (input_shape[0], self.output_dim)
