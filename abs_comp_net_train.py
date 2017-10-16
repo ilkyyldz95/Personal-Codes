@@ -33,9 +33,9 @@ loss = BTLoss
 
 # LOAD TRAIN DATA FOR COMPARISON LABELS: tr_pairs, tr_y
 
-# LOAD JAMES' NETWORK FOR F, call abs_net
-abs_net = create_googlenet(no_classes=hid_layer_dim, no_features=no_of_features)
-abs_net.load_weights("abs_label_F.h5")
+# LOAD JAMES' NETWORK FOR F
+F = create_googlenet(no_classes=hid_layer_dim, no_features=no_of_features)
+F.load_weights("abs_label_F.h5")
 print("F loaded")
 
 # CREATE TWIN NETWORKS
@@ -43,8 +43,8 @@ print("F loaded")
 input_a = Input(shape=input_shape)
 input_b = Input(shape=input_shape)
 
-processed_a = abs_net(input_a)
-processed_b = abs_net(input_b)
+processed_a = F(input_a)
+processed_b = F(input_b)
 
 distance = Lambda(BTPred, output_shape=(1,))([processed_a, processed_b])
 
@@ -54,5 +54,9 @@ abs_comp_net = Model([input_a, input_b], distance)
 rms = RMSprop()
 abs_comp_net.compile(loss=BTLoss, optimizer=rms)
 abs_comp_net.fit([tr_pairs[:, 0], tr_pairs[:, 1]], tr_y, batch_size=batch_size, epochs=epochs)
+
+# Save weights for F
+abs_comp_net.layers[2].save_weights("abs_comp_label_F.h5")
+print("Saved model to disk")
 
 

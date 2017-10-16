@@ -39,11 +39,10 @@ def create_network(F, hid_layer_dim, input_shape):
     3 parallel networks, with the same F and different Gs'''
 
     shared_input = Input(shape=input_shape)
-    # LOAD INITIAL WEIGHTS OF F INTO THE NEW MODEL
-    for i in range(len(F.layers)):
-        F.layers[i].set_weights(F.layers[i].get_weights())
-
+    # Load initial weights of F and pass input through F
+    F.load_weights("googlenet_weights.h5")
     f_out = F(shared_input)
+
     # Create G
     processed_norm = InvSigLayer(hid_layer_dim)(f_out)
     processed_pre = GausLayer(hid_layer_dim)(f_out)
@@ -55,7 +54,6 @@ def create_network(F, hid_layer_dim, input_shape):
 
     # Create the whole network
     concat_abs_net = Model(shared_input, activ_out)
-
     return concat_abs_net
 
 def absLoss(y_true, y_pred):
@@ -69,14 +67,13 @@ def absLoss(y_true, y_pred):
     return -K.log(diff)
 
 # INITIALIZE PARAMETERS
-hid_layer_dim = 1 #score
+hid_layer_dim = 1 #F has 1 output: score
 input_shape = (3,224,224)
-no_of_images = 196
 no_of_features = 1024
 epochs = 10
 batch_size = 1
 loss = absLoss
-optimizer = 'sgd'
+optimizer = 'adam'
 
 # LOAD DATA FOR ABSOLUTE LABELS
 with open('./Partitions.p', 'rb') as f:
@@ -105,11 +102,11 @@ for k in range(1):
     k_label_train_ori = np.reshape(k_label_abs_train,(-1,),order='F')
     k_label_train = biLabels(np.array(k_label_train_ori))
 
-# LOAD JAMES' NETWORK FOR F, call abs_net
-abs_net = create_googlenet(no_classes=hid_layer_dim, no_features=no_of_features)
+# LOAD JAMES' NETWORK FOR F
+F = create_googlenet(no_classes=hid_layer_dim, no_features=no_of_features)
 
 # CREATE F&G
-concat_abs_net = create_network(abs_net, hid_layer_dim, input_shape)
+concat_abs_net = create_network(F, hid_layer_dim, input_shape)
 
 # Train all models with corresponding images
 concat_abs_net.compile(loss=loss, optimizer=optimizer)
@@ -119,6 +116,6 @@ concat_abs_net.fit(k_img_train, k_label_train, batch_size=batch_size, epochs=epo
 concat_abs_net.layers[1].save_weights("abs_label_F.h5")
 print("Saved model to disk")
 
-custom_layers = {'PoolHelper': PoolHelper, 'LRN': LRN, 'SigLayer': SigLayer, 'GausLayer': GausLayer,
+'''custom_layers = {'PoolHelper': PoolHelper, 'LRN': LRN, 'SigLayer': SigLayer, 'GausLayer': GausLayer,
                  'InvSigLayer': InvSigLayer}
-score_function = load_model('abs_net.h5', custom_objects=custom_layers)
+score_function = load_model('abs_label_F.h5', custom_objects=custom_layers)'''

@@ -1,6 +1,7 @@
 from keras import backend as K
 from keras.engine.topology import Layer
 import numpy as np
+import keras.initializers
 
 '''G for plus disease'''
 class SigLayer(Layer):
@@ -11,18 +12,20 @@ class SigLayer(Layer):
 
     def build(self, input_shape):
         # initiate the tensor variables
-        self.a = self.add_weight(name='slope', shape=(input_shape[1], self.output_dim), initializer='uniform',
+        self.a = self.add_weight(name='slope', shape=(input_shape[1], self.output_dim),
+                                 initializer=keras.initializers.Constant(value=1),
                                  trainable=True)
-        self.b = self.add_weight(name='bias', shape=(1, self.output_dim), initializer='uniform',
+        self.b = self.add_weight(name='bias', shape=(1, input_shape[1]),
+                                 initializer=keras.initializers.Constant(value=0.5),
                                  trainable=True)
         # Create a trainable weight variable for this layer.
         self.trainable_weights = [self.a, self.b]
         super(SigLayer, self).build(input_shape)  # built=true
 
     def call(self, x):
-        # 1/(1 + exp(-ax + b))
-        # Dot: matrix multiplication
-        return K.pow(1+K.exp(-K.dot(x, self.a) + np.repeat(self.b, x.shape[0], axis=0)), -1)
+        # 1/(1 + exp(a(x - b)))
+        # Dot: matrix multiplication & repeat weights for batch size adaptation
+        return 1. / (1+K.exp(K.dot((x - K.repeat_elements(self.b, x.shape[0], axis=0)), self.a)))
 
     def compute_output_shape(self, input_shape):
         return (input_shape[0], self.output_dim)
