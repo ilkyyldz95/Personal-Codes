@@ -39,8 +39,7 @@ def create_network(F, hid_layer_dim, input_shape):
     3 parallel networks, with the same F and different Gs'''
 
     shared_input = Input(shape=input_shape)
-    # Load initial weights of F and pass input through F
-    F.load_weights("googlenet_weights.h5")
+    # Pass input through F
     f_out = F(shared_input)
 
     # Create G
@@ -102,8 +101,12 @@ for k in range(1):
     k_label_train_ori = np.reshape(k_label_abs_train,(-1,),order='F')
     k_label_train = biLabels(np.array(k_label_train_ori))
 
-# LOAD JAMES' NETWORK FOR F
+# LOAD JAMES' NETWORK FOR F along with ImageNet weights
+F_prev = create_googlenet(no_classes=1000, no_features=no_of_features)
+F_prev.load_weights("googlenet_weights.h5", by_name=True)
 F = create_googlenet(no_classes=hid_layer_dim, no_features=no_of_features)
+for i in range(len(F.layers) - 2): #last 2 layers depends on the number of classes
+        F.layers[i].set_weights(F_prev.layers[i].get_weights())
 
 # CREATE F&G
 concat_abs_net = create_network(F, hid_layer_dim, input_shape)
