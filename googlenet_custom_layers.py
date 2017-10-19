@@ -1,5 +1,6 @@
 from keras.layers.core import Layer
-import theano.tensor as T
+import tensorflow as tf
+from keras import backend as K
 
 
 class LRN(Layer):
@@ -10,21 +11,17 @@ class LRN(Layer):
         self.n = n
         super(LRN, self).__init__(**kwargs)
 
-    def call(self, x, mask=None):
-        b, ch, r, c = x.shape
-        half_n = self.n // 2  # half the local region
-        input_sqr = T.sqr(x)  # square the input
-        extra_channels = T.alloc(0., b, ch + 2 * half_n, r,
-                                 c)  # make an empty tensor with zero pads along channel dimension
-        input_sqr = T.set_subtensor(extra_channels[:, half_n:half_n + ch, :, :],
-                                    input_sqr)  # set the center to be the squared input
-        scale = self.k  # offset for the scale
-        norm_alpha = self.alpha / self.n  # normalized alpha
+    def call(self, X, mask=None):
+        b, ch, r, c = X._keras_shape
+        half_n = self.n // 2
+        input_sqr = K.square(X)
+        extra_channels = tf.zeros_like(X)  # make an empty tensor with zero pads along channel dimension
+        input_sqr = K.concatenate([extra_channels[:, :half_n, :, :], input_sqr, extra_channels[:, half_n:2*half_n, :, :]], axis = 1)
+        scale = self.k
         for i in range(self.n):
-            scale += norm_alpha * input_sqr[:, i:i + ch, :, :]
-        scale = scale ** self.beta
-        x = x / scale
-        return x
+            scale += self.alpha * input_sqr[:, i:i + ch, :, :]
+            scale = scale ** self.beta
+        return X / scale
 
     def get_config(self):
         config = {"alpha": self.alpha,

@@ -13,12 +13,13 @@
 #SBATCH --time=24:00:00
 #################
 #number of tasks you are requesting
-#SBATCH -n 1
+#SBATCH -N 1
+#SBATCH --exclusive
 #################
 #partition to use
-#SBATCH --partition=ser-par-10g-4
+#SBATCH --partition=par-gpu
 #################
 #number of nodes to distribute n tasks across
 #################
 
-python Source.py $1 $2
+python abs_net_train_g.py

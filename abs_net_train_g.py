@@ -8,7 +8,6 @@ from createInvSigLayer import InvSigLayer
 import numpy as np
 from googlenet import create_googlenet
 from keras import backend as K
-from theano.tensor import nonzero_values
 import pickle
 from keras.preprocessing.image import load_img, img_to_array
 from googlenet_custom_layers import PoolHelper, LRN
@@ -62,7 +61,7 @@ def absLoss(y_true, y_pred):
     y_pred = soft[g_1(s), g_2(s), g_3(s)]
     Take the g output corresponding to the label
     """
-    diff = nonzero_values(y_pred * y_true)
+    diff = K.dot(y_pred, y_true)
     return -K.log(diff)
 
 # INITIALIZE PARAMETERS
@@ -75,6 +74,7 @@ loss = absLoss
 optimizer = 'adam'
 
 # LOAD DATA FOR ABSOLUTE LABELS
+#partition_file = pickle.load(open('./Partitions.p', 'rb'))
 with open('./Partitions.p', 'rb') as f:
     u = pickle._Unpickler(f)
     u.encoding = 'latin1'

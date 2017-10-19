@@ -25,7 +25,7 @@ class InvSigLayer(Layer):
     def call(self, x):
         # 1 - 1/(1 + exp(a(x - b)))
         # Dot: matrix multiplication & repeat weights for batch size adaptation
-        return 1 - 1. / (1+K.exp(K.dot((x - K.repeat_elements(self.b, x.shape[0], axis=0)), self.a)))
+        return 1 - 1. / (1+K.exp(K.dot((x - self.b), self.a)))
 
     def compute_output_shape(self, input_shape):
         return (input_shape[0], self.output_dim)
