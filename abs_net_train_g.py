@@ -33,13 +33,12 @@ def biLabels(labels):
     binarized[np.arange(N).astype(np.int), labels.astype(np.int)] = 1
     return binarized
 
-def create_network(F, hid_layer_dim, input_shape):
+def create_network(F, hid_layer_dim):
     ''' F&G concatenated
     3 parallel networks, with the same F and different Gs'''
 
-    shared_input = Input(shape=input_shape)
-    # Pass input through F
-    f_out = F(shared_input)
+    shared_input = F.input
+    f_out = F.output
 
     # Create G
     processed_norm = InvSigLayer(hid_layer_dim)(f_out)
@@ -61,7 +60,7 @@ def absLoss(y_true, y_pred):
     y_pred = soft[g_1(s), g_2(s), g_3(s)]
     Take the g output corresponding to the label
     """
-    diff = K.dot(y_pred, y_true)
+    diff = K.dot(y_pred, K.transpose(y_true))
     return -K.log(diff)
 
 # INITIALIZE PARAMETERS
@@ -69,7 +68,7 @@ hid_layer_dim = 1 #F has 1 output: score
 input_shape = (3,224,224)
 no_of_features = 1024
 epochs = 10
-batch_size = 1
+batch_size = 32
 loss = absLoss
 optimizer = 'adam'
 
@@ -109,7 +108,7 @@ for i in range(len(F.layers) - 2): #last 2 layers depends on the number of class
         F.layers[i].set_weights(F_prev.layers[i].get_weights())
 
 # CREATE F&G
-concat_abs_net = create_network(F, hid_layer_dim, input_shape)
+concat_abs_net = create_network(F, hid_layer_dim)
 
 # Train all models with corresponding images
 concat_abs_net.compile(loss=loss, optimizer=optimizer)
