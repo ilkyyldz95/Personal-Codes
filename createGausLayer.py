@@ -1,6 +1,7 @@
 from keras import backend as K
 from keras.engine.topology import Layer
 import numpy as np
+from theano.tensor import tensordot
 from constraints import *
 import keras.initializers
 
@@ -27,7 +28,7 @@ class GausLayer(Layer):
         # Gaussian with mu and var
         # *: elementwise & repeat weights for batch size adaptation
         return K.exp(-((x - self.mu)**2)
-                     / (2 * self.var)) \
+                     / (2 *self.var)) \
                     * 1. / (K.sqrt(2 * np.pi * self.var) + K.epsilon())
 
     def compute_output_shape(self, input_shape):

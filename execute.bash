@@ -22,4 +22,4 @@
 #number of nodes to distribute n tasks across
 #################
 
-python abs_net_train_g.py
+python abs_net_train_g.py $1

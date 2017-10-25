@@ -1,6 +1,6 @@
 from keras.layers import Input, Dense, Convolution2D, MaxPooling2D, AveragePooling2D, ZeroPadding2D, Dropout, Flatten, \
     merge, Activation
-from keras.models import Model, model_from_json
+from keras.models import Model
 from keras.regularizers import l2
 from googlenet_custom_layers import PoolHelper, LRN
 from PIL import Image
