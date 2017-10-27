@@ -75,8 +75,8 @@ no_of_features = 1024
 epochs = 10
 batch_size = 32     #1 for validation, 100 for prediction
 input_shape = (3,224,224)
-loss = absLoss
-optimizer = 'sgd'
+loss = 'categorical_crossentropy'
+optimizer = 'rmsprop'
 
 # LOAD DATA FOR ABSOLUTE LABELS
 partition_file = pickle.load(open('./Partitions.p', 'rb'))
@@ -116,8 +116,11 @@ for k in [kthFold]:
 # plt.imshow(a.transpose(1,2,0))
 
 # LOAD JAMES' NETWORK FOR F along with ImageNet weights
+    F_prev = create_googlenet(no_classes=1000, no_features=no_of_features)
+    F_prev.load_weights("googlenet_weights.h5", by_name=True)
     F = create_googlenet(no_classes=hid_layer_dim, no_features=no_of_features)
-    F.load_weights("googlenet_weights.h5", by_name=True)
+    for i in range(len(F.layers) - 2):  # last 2 layers depends on the number of classes
+        F.layers[i].set_weights(F_prev.layers[i].get_weights())
 
     # CREATE F&G
     concat_abs_net = F
