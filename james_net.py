@@ -79,7 +79,10 @@ loss = 'categorical_crossentropy'
 optimizer = 'rmsprop'
 
 # LOAD DATA FOR ABSOLUTE LABELS
-partition_file = pickle.load(open('./Partitions.p', 'rb'))
+with open('./Partitions.p', 'rb') as f:
+    u = pickle._Unpickler(f)
+    u.encoding = 'latin1'
+    partition_file = u.load()
 img_folder = './preprocessed/All/'
 part_rsd_train = partition_file['RSDTrainPlusPartition']
 part_rsd_test = partition_file['RSDTestPlusPartition']
@@ -87,7 +90,7 @@ label_absolute = partition_file['label13']
 label_absolute[label_absolute==1.5] = 2
 order_name = partition_file['orderName']
 # kthFold = int(0)
-kthFold = int(sys.argv[1])
+kthFold = int(0)
 for k in [kthFold]:
     k_ind_rsd_train = part_rsd_train[k]
     k_ind_rsd_test = part_rsd_test[k]
