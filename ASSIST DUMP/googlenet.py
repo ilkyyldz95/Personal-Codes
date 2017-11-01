@@ -1,6 +1,6 @@
 from keras.layers import Input, Dense, Convolution2D, MaxPooling2D, AveragePooling2D, ZeroPadding2D, Dropout, Flatten, \
     merge, Activation
-from keras.models import Model
+from keras.models import Model, model_from_json
 from keras.regularizers import l2
 from googlenet_custom_layers import PoolHelper, LRN
 from PIL import Image
@@ -326,12 +326,12 @@ def create_googlenet(no_classes=1, no_features=None):
 
     if no_classes > 2:
         print("softmax activation")
-        loss3_classifier = Dense(no_classes, name='loss3/classifier', W_regularizer=l2(0.0002))(pool5_drop_7x7_s1)
-        loss3_classifier_act = Activation('softmax', name='prob')(loss3_classifier)
+        loss3_classifier = Dense(no_classes, name='loss3/classifier_modified', W_regularizer=l2(0.0002))(pool5_drop_7x7_s1)
+        loss3_classifier_act = Activation('softmax', name='prob_modified')(loss3_classifier)
     else:
         print("sigmoid activation")
-        loss3_classifier = Dense(1, name='loss3/classifier', W_regularizer=l2(0.0002))(pool5_drop_7x7_s1)
-        loss3_classifier_act = Activation('sigmoid', name='prob')(loss3_classifier)
+        loss3_classifier = Dense(1, name='loss3/classifier_modified', W_regularizer=l2(0.0002))(pool5_drop_7x7_s1)
+        loss3_classifier_act = Activation('sigmoid', name='prob_modified')(loss3_classifier)
 
     googlenet = Model(input=input, output=[loss3_classifier_act])
 
@@ -344,11 +344,9 @@ if __name__ == "__main__":
     parser.add_argument('-c', '--classes', dest='classes', default=1, type=int)
     parser.add_argument('-f', '--features', dest='features', default=1024, type=int)
     parser.add_argument('-o', '--out-file', dest='out')
-
     args = parser.parse_args()'''
     '''# parameters
     no_of_classes = 1 # 1 scalar score
     no_of_features = 1024
-
     # create model
     F = create_googlenet(no_classes=no_of_classes, no_features=no_of_features)'''

@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 from __future__ import print_function
 from keras.layers import Input, Lambda
-from keras.optimizers import RMSprop
+from keras import optimizers
 from keras import backend as K
 from googlenet import *
 
@@ -25,38 +25,40 @@ def BTLoss(y_true, y_pred):
 # INITIALIZE PARAMETERS
 hid_layer_dim = 1 #score
 input_shape = (3,224,224)
-no_of_images = 196
 no_of_features = 1024
-epochs = 10
-batch_size = 1
+epochs = 100
+batch_size = 32 #1 for validation, 100 for prediction
 loss = BTLoss
+sgd = optimizers.SGD(lr=10e-6)
+
 
 # LOAD TRAIN DATA FOR COMPARISON LABELS: tr_pairs, tr_y
 
 # LOAD JAMES' NETWORK FOR F
-F = create_googlenet(no_classes=hid_layer_dim, no_features=no_of_features)
-F.load_weights("abs_label_F.h5")
+F1 = create_googlenet(no_classes=hid_layer_dim, no_features=no_of_features)
+F2 = create_googlenet(no_classes=hid_layer_dim, no_features=no_of_features)
+F1.load_weights("abs_label_F.h5")
+F2.load_weights("abs_label_F.h5")
 print("F loaded")
 
 # CREATE TWIN NETWORKS
 # because we re-use the same instance `base_network`, the weights of the network will be shared across the two branches
-input_a = Input(shape=input_shape)
-input_b = Input(shape=input_shape)
+input_a = F1.input
+input_b = F2.input
 
-processed_a = F(input_a)
-processed_b = F(input_b)
+processed_a = F1(input_a)
+processed_b = F2(input_b)
 
 distance = Lambda(BTPred, output_shape=(1,))([processed_a, processed_b])
 
 abs_comp_net = Model([input_a, input_b], distance)
 
 # train
-rms = RMSprop()
-abs_comp_net.compile(loss=BTLoss, optimizer=rms)
+abs_comp_net.compile(loss=BTLoss, optimizer=sgd)
 abs_comp_net.fit([tr_pairs[:, 0], tr_pairs[:, 1]], tr_y, batch_size=batch_size, epochs=epochs)
 
 # Save weights for F
-abs_comp_net.layers[2].save_weights("abs_comp_label_F.h5")
+abs_comp_net.save("abs_comp_label_F_32_F_inputAll_" + str(kthFold) + ".h5")
 print("Saved model to disk")
 
 

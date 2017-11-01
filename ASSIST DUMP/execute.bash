@@ -13,11 +13,10 @@
 #SBATCH --time=24:00:00
 #################
 #number of tasks you are requesting
-#SBATCH -N 1
-#SBATCH --exclusive
+#SBATCH -n 1
 #################
 #partition to use
-#SBATCH --partition=par-gpu
+#SBATCH --partition=par-gpu-2
 #################
 #number of nodes to distribute n tasks across
 #################
