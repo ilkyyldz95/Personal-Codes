@@ -74,7 +74,7 @@ epochs = 100
 batch_size = 32     #1 for validation, 100 for prediction
 input_shape = (3,224,224)
 loss = absLoss
-sgd = optimizers.SGD(lr=10e-6)
+sgd = optimizers.SGD(lr=1e-10)
 
 # LOAD DATA FOR ABSOLUTE LABELS
 partition_file = pickle.load(open('./Partitions.p', 'rb'))

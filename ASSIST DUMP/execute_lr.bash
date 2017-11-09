@@ -1,12 +1,12 @@
 #!/bin/bash
 #set a job name  
-#SBATCH --job-name=run2
+#SBATCH --job-name=run1
 #################  
 #a file for job output, you can check job progress
-#SBATCH --output=run2.out
+#SBATCH --output=run1.out
 #################
 # a file for errors from the job
-#SBATCH --error=run2.err
+#SBATCH --error=run1.err
 #################
 #time you think you need; default is one day
 #in minutes in this case, hh:mm:ss
@@ -22,4 +22,4 @@
 #number of nodes to distribute n tasks across
 #################
 
-python abs_comp_net_train.py $1
+python abs_net_train_g_lr.py $1

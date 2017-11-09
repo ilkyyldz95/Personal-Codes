@@ -90,7 +90,7 @@ x_test = x_test.astype('float32')
 x_train /= 255
 x_test /= 255
 input_dim = 784
-epochs = 10
+epochs = 100
 no_of_classes = 10
 
 # create training+test positive and negative pairs
