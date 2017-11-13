@@ -16,9 +16,9 @@
 #SBATCH -n 30
 #################
 #partition to use
-#SBATCH --partition=ser-par-10g-5
+#SBATCH --partition=ser-par-10g-4
 #################
 #number of nodes to distribute n tasks across
 #################
 
-python train.py
+python dataset_processor.py

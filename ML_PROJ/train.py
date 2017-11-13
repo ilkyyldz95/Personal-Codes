@@ -8,11 +8,12 @@ from sklearn.metrics import roc_auc_score
 from os import listdir
 import numpy as np
 from time import time
-# init
+
+# initialization
 # CHANNELS LAST!!!
 input_shape = (335, 472, 3)
-data_path_pos = '../positive/'
-data_path_neg = '../negative/'
+data_path_pos = './positive/'
+data_path_neg = './negative/'
 num_imag_pos = len(listdir(data_path_pos))
 num_imag_neg = len(listdir(data_path_neg))
 batch_size = 10
