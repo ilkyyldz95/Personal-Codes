@@ -9,10 +9,8 @@ from createInvSigLayer import InvSigLayer
 import numpy as np
 from googlenet import create_googlenet
 from keras import backend as K
-import pickle
-from keras.preprocessing.image import load_img, img_to_array
-from scipy.ndimage import rotate
 from keras import optimizers
+from importData import *
 
 '''Trains 3 different G  with absolute labels'''
 def biLabels(labels):
@@ -70,68 +68,31 @@ def absLoss(y_true, y_pred):
 # INITIALIZE PARAMETERS
 hid_layer_dim = 1 #F has 1 output: score
 no_of_features = 1024
-epochs = 100
+epochs = 25
 batch_size = 32     #1 for validation, 100 for prediction
 input_shape = (3,224,224)
 loss = absLoss
 sgd = optimizers.SGD(lr=1e-10)
 
 # LOAD DATA FOR ABSOLUTE LABELS
-partition_file = pickle.load(open('./Partitions.p', 'rb'))
-'''with open('./Partitions.p', 'rb') as f:
-    u = pickle._Unpickler(f)
-    u.encoding = 'latin1'
-    partition_file = u.load()'''
-img_folder = './preprocessed/All/'
-part_rsd_train = partition_file['RSDTrainPlusPartition']
-part_rsd_test = partition_file['RSDTestPlusPartition']
-label_absolute = partition_file['label13']
-label_absolute[label_absolute==1.5] = 2
-order_name = partition_file['orderName']
-# kthFold = int(0)
 kthFold = int(sys.argv[1])
-for k in [kthFold]:
-    k_ind_rsd_train = part_rsd_train[k]
-    k_ind_rsd_test = part_rsd_test[k]
-    k_img_train_list = [img_folder+order_name[order+1]+'.png' for order in k_ind_rsd_train]
-    k_img_test_list = [img_folder+order_name[order+1]+'.png' for order in k_ind_rsd_test]
-# Load Images
-    # Image for training
-    k_img_train = img_to_array(load_img(k_img_train_list[0]))[np.newaxis,:,:,:]
-    for img_name_iter in k_img_train_list[1:]:
-        img_iter = img_to_array(load_img(img_name_iter))[np.newaxis,:,:,:]
-        k_img_train = np.concatenate((k_img_train,img_iter),axis=0)
-    k_img_train_ori = np.tile(k_img_train,[13,1,1,1])
-    k_label_abs_train = label_absolute[k_ind_rsd_train,:]
-    k_label_train_ori = np.reshape(k_label_abs_train,(-1,),order='F')
-    k_label_train_bi = biLabels(np.array(k_label_train_ori))
-
-    # Rotate image at each 90 degree and flip images. A single image will show 8 times via its rotations and filps in training.
-    k_img_train_rotate_90 = rotate(k_img_train_ori,90,axes=(2,3))
-    k_img_train_rotate_90_ori = np.concatenate((k_img_train_ori,k_img_train_rotate_90),axis=0)
-    k_img_train_rotate_180 =  rotate(k_img_train_rotate_90_ori,180,axes=(2,3))
-    k_img_train_rotate = np.concatenate((k_img_train_rotate_90_ori,k_img_train_rotate_180),axis=0)
-    k_img_train_flip = np.flipud(k_img_train_rotate)
-    k_img_train = np.concatenate((k_img_train_rotate,np.flipud(k_img_train_rotate)),axis=0)
-    k_label_train = np.tile(k_label_train_bi,(8,1))
-
-# plt.imshow(a.transpose(1,2,0))
+# kthFold = int(0)
+importer = importData(kthFold)
+k_img_train, k_label_train = importer.importAbsTrainData()
 
 # LOAD JAMES' NETWORK FOR F along with ImageNet weights
-    F_prev = create_googlenet(no_classes=1000, no_features=no_of_features)
-    F_prev.load_weights("googlenet_weights.h5", by_name=True)
-    F = create_googlenet(no_classes=hid_layer_dim, no_features=no_of_features)
-    for i in range(len(F.layers) - 2): #last 2 layers depends on the number of classes
-        F.layers[i].set_weights(F_prev.layers[i].get_weights())
+F_prev = create_googlenet(no_classes=1000, no_features=no_of_features)
+F_prev.load_weights("googlenet_weights.h5", by_name=True)
+F = create_googlenet(no_classes=hid_layer_dim, no_features=no_of_features)
+for i in range(len(F.layers) - 2): #last 2 layers depends on the number of classes
+    F.layers[i].set_weights(F_prev.layers[i].get_weights())
 
-    # CREATE F&G
-    concat_abs_net = create_network(F, hid_layer_dim, input_shape)
+# CREATE F&G
+concat_abs_net = create_network(F, hid_layer_dim, input_shape)
 
-    # Train all models with corresponding images
-    concat_abs_net.compile(loss=loss, optimizer=sgd)
-    concat_abs_net.fit(k_img_train, k_label_train, batch_size=batch_size, epochs=epochs)
+# Train all models with corresponding images
+concat_abs_net.compile(loss=loss, optimizer=sgd)
+concat_abs_net.fit(k_img_train, k_label_train, batch_size=batch_size, epochs=epochs)
 
-    # Save weights for F
-    # concat_abs_net.layers[1].save_weights("abs_label_F_"+str(kthFold)+".h5")
-    concat_abs_net.save("abs_label_F_32_F_inputAll_" + str(kthFold) + ".h5")
-    print("Saved model to disk")
+# Save weights for F
+concat_abs_net.save("abs_label_1e-10_" + str(kthFold) + ".h5")

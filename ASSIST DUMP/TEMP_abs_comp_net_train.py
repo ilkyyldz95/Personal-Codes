@@ -95,13 +95,13 @@ input_shape = (3,224,224)
 loss = totalLoss
 sgd = optimizers.SGD(lr=1e-10)
 alpha = 0.5 # balance between absolute and comparison contributions
-'''
+
 # LOAD DATA FOR ALL LABELS
 partition_file = pickle.load(open('./Partitions.p', 'rb'))
-with open('./Partitions.p', 'rb') as f:
+'''with open('./Partitions.p', 'rb') as f:
     u = pickle._Unpickler(f)
     u.encoding = 'latin1'
-    partition_file = u.load()
+    partition_file = u.load()'''
 img_folder = './preprocessed/All/'
 
 # kthFold = int(0)
@@ -173,7 +173,6 @@ for k in [kthFold]:
     k_img_train_comp_2 = np.concatenate((k_img_train_2_rotate, k_img_train_2_flip), axis=0)
 
     k_label_train_comp = np.transpose(np.tile(k_label_comp_train, (1, 8)))
-'''
 
 # LOAD JAMES' NETWORK FOR F and INITIALIZE WITH IMAGENET WEIGHTS
 F_prev = create_googlenet(no_classes=1000, no_features=no_of_features)
@@ -213,5 +212,5 @@ concat_abs_net.fit(k_img_train_abs, k_label_train_abs,
 
 # Save weights for F
 # concat_abs_net.layers[1].save_weights("abs_label_F_"+str(kthFold)+".h5")
-concat_abs_net.save("abs_label_F_32_F_inputAll_" + str(kthFold) + ".h5")
+concat_abs_net.save("abs_comp_label_" + str(kthFold) + ".h5")
 print("Saved model to disk")

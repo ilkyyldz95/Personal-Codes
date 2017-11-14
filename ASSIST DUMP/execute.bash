@@ -17,9 +17,9 @@
 #SBATCH --exclusive
 #################
 #partition to use
-#SBATCH --partition=par-gpu
+#SBATCH --partition=ser-par-10g-2
 #################
 #number of nodes to distribute n tasks across
 #################
 
-python abs_comp_net_train.py $1
+python abs_net_train_g.py $1
