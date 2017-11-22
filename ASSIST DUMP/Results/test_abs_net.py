@@ -20,7 +20,7 @@ def absLoss(y_true, y_pred):
     return -K.log(diff)
 
 # Initialization
-lr = 1e-08
+lr = 1e-06
 
 for kthFold in range(5):
     # LOAD DATA FOR ABSOLUTE LABELS
@@ -28,7 +28,7 @@ for kthFold in range(5):
     k_img_test, k_label_test = importer.importAbsTestData()
 
     # Load model
-    concat_abs_net = load_model("abs_label_" + str(lr) + '_' + str(kthFold) + "_2ndRep.h5",
+    concat_abs_net = load_model("abs_label_" + str(lr) + '_' + str(kthFold) + ".h5",
                                 custom_objects={'LRN': LRN, 'PoolHelper': PoolHelper,
                                                 'InvSigLayer': InvSigLayer,
                                                 'GausLayer': GausLayer,

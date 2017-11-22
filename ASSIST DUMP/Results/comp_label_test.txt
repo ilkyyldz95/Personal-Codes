@@ -18,3 +18,8 @@ After 18 iterations:
 4   AUC:0.505446460732   min_estimate:[-0.46562189]   max_estimate:[ 0.46020621]
 
 After 36 iterations:
+0th fold   AUC:0.510067256637   min_estimate:[-0.14494145]   max_estimate:[ 0.50024122]
+1th fold   AUC:0.507680402846   min_estimate:[-0.12931776]   max_estimate:[ 0.5457812]
+2th fold   AUC:0.50375163827   min_estimate:[-0.31877977]   max_estimate:[ 0.06497073]
+3th fold   AUC:0.524048942664   min_estimate:[-0.26304853]   max_estimate:[ 0.56200898]
+4th fold   AUC:0.505957260499   min_estimate:[-0.48057553]   max_estimate:[ 0.43726194]

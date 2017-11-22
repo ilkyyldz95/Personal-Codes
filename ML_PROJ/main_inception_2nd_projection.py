@@ -77,4 +77,4 @@ if __name__ == '__main__':
         count += 1
 
         print 'Passing 2nd half of data to inception...\n'
-        accuracy, training_duration = inception_2nd_projection(x_train, y_train, x_test, y_test, save_model=args.findex)
+        accuracy, training_duration = inception_2nd_projection(x_train, y_train, x_test, y_test, save_model=int(args.findex))

@@ -33,7 +33,7 @@ if __name__ == '__main__':
     # Initialize K-fold operator
     kf = KFold(n_splits=K, shuffle=True, random_state=1) # Define the split - into K folds
     # train_index, test_index = list(kf.split(range(num_imag_pos+num_imag_neg)))[int(args.findex)]
-    train_index, test_index = list(kf.split(all_images))[0]
+    train_index, test_index = list(kf.split(all_images))[int(args.findex)]
 
 
     x_train = np.zeros((len(train_index),335,472,3), dtype=np.uint8)
@@ -75,4 +75,4 @@ if __name__ == '__main__':
         count += 1
 
         print 'Passing data to inception...\n'
-        accuracy, training_duration = inception(x_train, y_train, x_test, y_test, save_model=args.findex)
+        accuracy, training_duration = inception(x_train, y_train, x_test, y_test, save_model=int(args.findex))

@@ -6,9 +6,6 @@ After 40 iterations:
 1e-09: AUC:0.59
 1e-10: AUC:0.6
 
-LR: 1e-06
-After 60 iterations:
-
 LR: 1e-08
 After 60 iterations:
 
@@ -18,4 +15,19 @@ After 60 iterations:
 3th fold   AUC:0.558894230769   min_estimate:[ 0.0895681]   max_estimate:[ 0.26861075]
 4th fold   AUC:0.23025   min_estimate:[ 0.29266855]   max_estimate:[ 0.87247634]
 
-After 120 iterations:
+After 120 iterations: Average: 0.342882273185
+0th fold   AUC:0.238847006652   min_estimate:[ 0.15030381]   max_estimate:[ 0.66135842]
+1th fold   AUC:0.19890535309   min_estimate:[ 0.86620528]   max_estimate:[ 0.95957637]
+2th fold   AUC:0.487514775414   min_estimate:[ 0.44541436]   max_estimate:[ 0.85998917]
+3th fold   AUC:0.558894230769   min_estimate:[ 0.0895681]   max_estimate:[ 0.26861075]
+4th fold   AUC:0.23025   min_estimate:[ 0.29298386]   max_estimate:[ 0.87265772]
+
+LR: 1e-06
+After 60 iterations: Average: 0.3498832636632
+0th fold   AUC:0.268824833703   min_estimate:[ 0.07929142]   max_estimate:[ 0.36761484]
+1th fold   AUC:0.603257242024   min_estimate:[ 0.02534267]   max_estimate:[ 0.22054307]
+2th fold   AUC:0.20131501182   min_estimate:[ 0.0098578]   max_estimate:[ 0.0968372]
+3th fold   AUC:0.543269230769   min_estimate:[ 0.86924058]   max_estimate:[ 0.96565932]
+4th fold   AUC:0.13275   min_estimate:[ 0.95356441]   max_estimate:[ 0.99716741]
+
+After 120 iterations

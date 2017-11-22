@@ -5,6 +5,7 @@ from time import time
 
 
 def inception(x_train, y_train, x_test, y_test, save_model=None):
+
     input_shape = (335, 472, 3)
     batch_size = 10
     epochs = 1
@@ -42,12 +43,11 @@ def inception(x_train, y_train, x_test, y_test, save_model=None):
     # Test. Then, display some results
     accuracy_metric = model.evaluate(x_test, y_test)[1]
 
-    print
-    'Binary Accuracy (correct decision % / 100):', accuracy_metric
-    print
-    'Training time in hours:' + str(training_time / 3600.)
+    print 'Binary Accuracy (correct decision % / 100):', accuracy_metric
+    print 'Training time in hours:'+str(training_time/3600.)
 
     if save_model:
-        print
-        'Saving model in current directory as:', '1st_half_fold_index_' + str(save_model) + '.h5'
+        print 'Saving model in current directory as:', '1st_half_fold_index_' + str(save_model) + '.h5'
         model.save('1st_half_fold_index_' + str(save_model) + '.h5')
+
+    return accuracy_metric, training_time

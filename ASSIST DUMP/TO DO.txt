@@ -1,11 +1,10 @@
 CHANNELS_FIRST
+IOANNIDIS PARTITION
 
 train abs and comp label for all folds UNTIL THEY CONVERGE and compare
-    fix import custom layers for abs label training
-    resume training: https://keras.io/getting-started/faq/#how-can-i-save-a-keras-model
 
 at each epoch, minimize abs and comp loss iteratively
 
-how to run with gpu: david kaeli, yale, yuan, alican
+how to run with gpu: alican, veysi, yale, nvidia
 	https://stackoverflow.com/questions/45662253/can-i-run-keras-model-on-gpu
 
