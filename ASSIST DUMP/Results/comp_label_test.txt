@@ -1,0 +1,20 @@
+After 25 iterations:
+
+0.0001   AUC:0.505451327434   min_estimate:[-0.00876692]   max_estimate:[ 0.04444679]
+1e-05   AUC:0.489168141593   min_estimate:[-0.05681259]   max_estimate:[ 0.15629165]
+1e-06   AUC:0.501250265487   min_estimate:[-0.15361395]   max_estimate:[ 0.19716173]
+1e-07   AUC:0.494718584071   min_estimate:[ 0.08078516]   max_estimate:[ 0.59861523]
+1e-08   AUC:0.474867256637   min_estimate:[ 0.03201109]   max_estimate:[ 0.77614176]
+1e-09   AUC:0.49185840708   min_estimate:[-0.85156947]   max_estimate:[-0.27191457]
+1e-10   AUC:0.475838584071   min_estimate:[ 0.16358167]   max_estimate:[ 0.64156687]
+
+LR=1e-06
+After 18 iterations:
+
+0   AUC:0.509053451327   min_estimate:[-0.0909465]   max_estimate:[ 0.56732619]
+1   AUC:0.504590917491   min_estimate:[ 0.06512171]   max_estimate:[ 0.7048918]
+2   AUC:0.500065530799   min_estimate:[-0.47971809]   max_estimate:[ 0.02118313]
+3   AUC:0.524472845966   min_estimate:[-0.14008549]   max_estimate:[ 0.63754684]
+4   AUC:0.505446460732   min_estimate:[-0.46562189]   max_estimate:[ 0.46020621]
+
+After 36 iterations:

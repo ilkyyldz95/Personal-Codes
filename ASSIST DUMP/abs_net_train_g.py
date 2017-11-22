@@ -1,38 +1,17 @@
 from __future__ import absolute_import
 from __future__ import print_function
-import sys
-from keras.layers import Input, Activation, merge
-from keras.models import Model, load_model
+from keras.layers import Activation, merge
+from keras.models import Model
 from createSigLayer import SigLayer
 from createGausLayer import GausLayer
 from createInvSigLayer import InvSigLayer
-import numpy as np
 from googlenet import create_googlenet
 from keras import backend as K
 from keras import optimizers
 from importData import *
 
 '''Trains 3 different G  with absolute labels'''
-def biLabels(labels):
-    """
-    This function will binarize labels.
-    There are C classes {1,2,3,4,...,c} in the labels, the output would be c dimensional vector.
-    Input:
-        - labels: (N,) np array. The element value indicates the class index.
-    Output:
-        - biLabels: (N, C) array. Each row has and only has a 1, and the other elements are all zeros.
-    Example:
-        The input labels = np.array([1,2,2,1,3])
-        The binaried labels are np.array([[1,0,0],[0,1,0],[0,1,0],[1,0,0],[0,0,1]])
-    """
-    N = labels.shape[0]
-    labels.astype(np.int)
-    C = len(np.unique(labels))
-    binarized = np.zeros((N, C))
-    binarized[np.arange(N).astype(np.int), labels.astype(np.int)] = 1
-    return binarized
-
-def create_network(F, hid_layer_dim, input_shape):
+def create_network(F, hid_layer_dim):
     ''' F&G concatenated
     3 parallel networks, with the same F and different Gs'''
 
@@ -66,13 +45,14 @@ def absLoss(y_true, y_pred):
     return -K.log(diff)
 
 # INITIALIZE PARAMETERS
+epochs = 60
+lr = 1e-06
 hid_layer_dim = 1 #F has 1 output: score
 no_of_features = 1024
-epochs = 25
 batch_size = 32     #1 for validation, 100 for prediction
 input_shape = (3,224,224)
 loss = absLoss
-sgd = optimizers.SGD(lr=1e-10)
+sgd = optimizers.SGD(lr=lr)
 
 # LOAD DATA FOR ABSOLUTE LABELS
 kthFold = int(sys.argv[1])
@@ -88,11 +68,11 @@ for i in range(len(F.layers) - 2): #last 2 layers depends on the number of class
     F.layers[i].set_weights(F_prev.layers[i].get_weights())
 
 # CREATE F&G
-concat_abs_net = create_network(F, hid_layer_dim, input_shape)
+concat_abs_net = create_network(F, hid_layer_dim)
 
 # Train all models with corresponding images
 concat_abs_net.compile(loss=loss, optimizer=sgd)
 concat_abs_net.fit(k_img_train, k_label_train, batch_size=batch_size, epochs=epochs)
 
-# Save weights for F
-concat_abs_net.save("abs_label_1e-10_" + str(kthFold) + ".h5")
+# Save model
+concat_abs_net.save("abs_label_"+ str(lr) + '_' + str(kthFold) + ".h5")

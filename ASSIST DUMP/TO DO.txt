@@ -1,8 +1,11 @@
 CHANNELS_FIRST
 
-train abs and comp label for all folds for 25 iterations and compare
+train abs and comp label for all folds UNTIL THEY CONVERGE and compare
+    fix import custom layers for abs label training
+    resume training: https://keras.io/getting-started/faq/#how-can-i-save-a-keras-model
 
 at each epoch, minimize abs and comp loss iteratively
 
-how to run with gpu
+how to run with gpu: david kaeli, yale, yuan, alican
+	https://stackoverflow.com/questions/45662253/can-i-run-keras-model-on-gpu
 

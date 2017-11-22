@@ -7,7 +7,7 @@ import keras.initializers
 
 '''G for pre-plus disease'''
 class GausLayer(Layer):
-    def __init__(self, input_dim, output_dim=1, **kwargs):
+    def __init__(self, input_dim = 1, output_dim=1, **kwargs):
         self.output_dim = output_dim
         self.input_dim = input_dim
         super(GausLayer, self).__init__(**kwargs)
@@ -33,3 +33,12 @@ class GausLayer(Layer):
 
     def compute_output_shape(self, input_shape):
         return (input_shape[0], self.output_dim)
+
+    '''def get_config(self):
+        config = {"mu": self.mu,
+                  "var": self.var,
+                  "output_dim": self.output_dim,
+                  "input_dim": self.input_dim,
+                  "trainable_weights": self.trainable_weights}
+        base_config = super(LRN, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))'''

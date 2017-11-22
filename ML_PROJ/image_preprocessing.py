@@ -1,6 +1,5 @@
 from os import listdir
 import numpy as np
-
 from scipy.ndimage import imread
 from scipy.misc import imresize, imsave
 from scipy.ndimage import rotate
@@ -25,7 +24,7 @@ dim_average = [335, 472]
 for image_name in listdir(image_dir):
 
     # read image
-    img = imread(image_dir+image_name )
+    img = imread(image_dir+image_name)
 
     # rotate image 4 times
     img_rotate_90 = rotate(img, 90, axes=(0, 1))

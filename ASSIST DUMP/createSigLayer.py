@@ -5,7 +5,7 @@ import keras.initializers
 
 '''G for plus disease'''
 class SigLayer(Layer):
-    def __init__(self, input_dim, output_dim=1, **kwargs):
+    def __init__(self, input_dim = 1, output_dim=1, **kwargs):
         self.output_dim = output_dim
         self.input_dim = input_dim
         super(SigLayer, self).__init__(**kwargs)
@@ -29,3 +29,12 @@ class SigLayer(Layer):
 
     def compute_output_shape(self, input_shape):
         return (input_shape[0], self.output_dim)
+
+    '''def get_config(self):
+        config = {"a": self.a,
+                  "b": self.b,
+                  "output_dim": self.output_dim,
+                  "input_dim": self.input_dim,
+                  "trainable_weights": self.trainable_weights}
+        base_config = super(SigLayer, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))'''

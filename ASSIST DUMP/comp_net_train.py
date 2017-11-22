@@ -27,15 +27,15 @@ def BTLoss(y_true, y_pred):
 hid_layer_dim = 1 #score
 input_shape = (3,224,224)
 no_of_features = 1024
-epochs = 13
+epochs = 18
 batch_size = 32 #1 for validation, 100 for prediction
 loss = BTLoss
-lr = float(sys.argv[1])
+lr = 1e-06
 sgd = optimizers.SGD(lr=lr)
 
 # LOAD DATA FOR COMPARISON LABELS
-# kthFold = int(sys.argv[1])
-kthFold = int(0)
+kthFold = int(sys.argv[1])
+# kthFold = int(0)
 importer = importData(kthFold)
 k_img_train_1, k_img_train_2, k_label_train = importer.importCompTrainData()
 
@@ -47,7 +47,6 @@ F2 = create_googlenet(no_classes=hid_layer_dim, no_features=no_of_features)
 for i in range(len(F1.layers) - 2): #last 2 layers depends on the number of classes
     F1.layers[i].set_weights(F_prev.layers[i].get_weights())
     F2.layers[i].set_weights(F_prev.layers[i].get_weights())
-print("F loaded")
 
 # CREATE TWIN NETWORKS: Siamese
 # because we re-use the same instance `base_network`, the weights of the network will be shared across the two branches
@@ -65,7 +64,7 @@ comp_net = Model([input_a, input_b], distance)
 comp_net.compile(loss=loss, optimizer=sgd)
 comp_net.fit([k_img_train_1, k_img_train_2], k_label_train, batch_size=batch_size, epochs=epochs)
 
-# Save weights for F
+# Save model
 comp_net.save("comp_label_" + str(lr) + "_" + str(kthFold) + ".h5")
 
 

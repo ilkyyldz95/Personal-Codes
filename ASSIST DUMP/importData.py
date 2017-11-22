@@ -63,7 +63,7 @@ class importData(object):
             k_img_train_rotate = np.concatenate((k_img_train_rotate_90_ori,k_img_train_rotate_180),axis=0)
             k_img_train_flip = np.flipud(k_img_train_rotate)
             k_img_train = np.concatenate((k_img_train_rotate,k_img_train_flip),axis=0)
-            k_label_train = np.tile(k_label_train_bi,(8,1))
+            k_label_train = 1.0 * np.tile(k_label_train_bi,(8,1))
 
             return k_img_train, k_label_train
 
@@ -82,7 +82,7 @@ class importData(object):
                 K_img_test = np.concatenate((K_img_test, img_iter), axis=0)
             k_img_test = np.tile(K_img_test, [13, 1, 1, 1])
             k_label_abs_test = label_absolute[k_ind_rsd_test, :]
-            k_label_test = np.reshape(k_label_abs_test, (-1,), order='F')
+            k_label_test = 1.0 * np.reshape(k_label_abs_test, (-1,), order='F')
 
             return k_img_test, k_label_test
 
@@ -127,7 +127,7 @@ class importData(object):
                 k_label_train = np.transpose(np.tile(k_label_comp_train,(1,8)))'''
             k_img_train_1 = k_img_train_ori_1
             k_img_train_2 = k_img_train_ori_2
-            k_label_train = k_label_comp_train
+            k_label_train = 1.0 * np.array(k_label_comp_train)
             return k_img_train_1, k_img_train_2, k_label_train
 
     def importCompTestData(self):
@@ -142,7 +142,6 @@ class importData(object):
                 (img_folder + k_ind_image_all[index][0] + '.png', img_folder + k_ind_image_all[index][1] + '.png') for
                 index in k_ind_cmp_test]
             # Load Images
-            # k_img_train_1: 1st elm of all pairs,channels,imagex,imagey
             k_img_test_1 = img_to_array(load_img(k_img_test_list[0][0])).astype(np.uint8)[np.newaxis, :, :, :]
             k_img_test_2 = img_to_array(load_img(k_img_test_list[0][1])).astype(np.uint8)[np.newaxis, :, :, :]
             for img_names_iter in k_img_test_list[1:]:
@@ -154,4 +153,5 @@ class importData(object):
             k_img_test_1 = np.tile(k_img_test_1, [5, 1, 1, 1])
             k_img_test_2 = np.tile(k_img_test_2, [5, 1, 1, 1])
             k_label_test = [label_cmp[l][index][2] for index in k_ind_cmp_test for l in range(5)]
+            k_label_test = 1.0 * np.array(k_label_test)
             return k_img_test_1, k_img_test_2, k_label_test

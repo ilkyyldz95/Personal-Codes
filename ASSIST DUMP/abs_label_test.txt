@@ -1,7 +1,0 @@
-LR: 1e-10
-
-0th fold_AUC:0.28266075388_min_estimate:[ 0.57900083]_max_estimate:[ 0.93456638]
-1st fold_AUC:0.0149512748632_min_estimate:[ 0.24870439]_max_estimate:[ 0.58755028]
-2nd fold_AUC:0.730496453901_min_estimate:[ 0.20015271]_max_estimate:[ 0.65778571]
-3rd fold_AUC:0.800480769231_min_estimate:[ 0.10187228]_max_estimate:[ 0.38362309]
-4th fold_AUC:0.31475_min_estimate:[ 0.19254027]_max_estimate:[ 0.63953656]
