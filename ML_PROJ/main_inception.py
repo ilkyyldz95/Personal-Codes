@@ -35,7 +35,6 @@ if __name__ == '__main__':
     # train_index, test_index = list(kf.split(range(num_imag_pos+num_imag_neg)))[int(args.findex)]
     train_index, test_index = list(kf.split(all_images))[int(args.findex)]
 
-
     x_train = np.zeros((len(train_index),335,472,3), dtype=np.uint8)
     y_train = np.zeros(len(train_index), dtype=np.uint8)
 
@@ -74,5 +73,5 @@ if __name__ == '__main__':
         y_test[count] = Y[idx]
         count += 1
 
-        print 'Passing data to inception...\n'
-        accuracy, training_duration = inception(x_train, y_train, x_test, y_test, save_model=int(args.findex))
+    print 'Passing data to inception...\n'
+    accuracy, training_duration = inception(x_train, y_train, x_test, y_test, save_model=int(args.findex))
