@@ -2,16 +2,17 @@ from __future__ import absolute_import
 from __future__ import print_function
 from keras.layers import Input, Activation, merge, Lambda
 from keras.models import Model, load_model
+from keras import optimizers
+from googlenet import create_googlenet
+from googlenet_custom_layers import *
+from importData import *
+from sklearn.metrics import roc_auc_score
 from createSigLayer import SigLayer
 from createGausLayer import GausLayer
 from createInvSigLayer import InvSigLayer
-from googlenet import create_googlenet
-from googlenet_custom_layers import *
 from keras import backend as K
-from importData import *
-from keras import optimizers
 
-'''Resumes training whole network with absolute and comparison labels simultaneously'''
+'''Imports model and tests with all labels'''
 def create_abs_network(F):
     ''' F&G concatenated
     3 parallel networks, with the same F and different Gs'''
@@ -59,60 +60,66 @@ def BTLoss(y_true, y_pred):
     return (1-alpha) * K.log(1 + exponent)
 
 # INITIALIZE PARAMETERS
-epochs = 3
-alpha = float(sys.argv[2]) # balance between absolute and comparison contributions
+#alpha = float(sys.argv[1]) # balance between absolute and comparison contributions
 #alpha = float(0.5) # balance between absolute and comparison contributions
-kthFold = int(sys.argv[1])
-#kthFold = int(0)
+#kthFold = int(sys.argv[1])
+kthFold = int(0)
 
 lr=1e-06
 sgd = optimizers.SGD(lr=lr)
 no_of_features = 1024
-batch_size = 32
 
 # LOAD DATA
 importer = importData(kthFold)
-k_img_train_abs, k_label_train_abs = importer.importAbsTrainData()
-k_img_train_1, k_img_train_2, k_label_train_comp = importer.importCompTrainData()
+k_img_test_abs, k_label_test_abs = importer.importAbsTestData()
+k_img_test_1, k_img_test_2, k_label_test_comp = importer.importCompTestData()
+# Binary AUC test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+k_label_test_abs[k_label_test_abs == 1] = 0
+k_label_test_abs[k_label_test_abs == 2] = 1
 
 # LOAD JAMES' NETWORK FOR F along with ImageNet weights
 F_prev = create_googlenet(no_classes=1000, no_features=no_of_features)
 F_prev.load_weights("googlenet_weights.h5", by_name=True)
 F1 = create_googlenet(no_classes=1, no_features=no_of_features)
-F2 = create_googlenet(no_classes=1, no_features=no_of_features)
 for i in range(len(F1.layers) - 2): #last 2 layers depends on the number of classes
     F1.layers[i].set_weights(F_prev.layers[i].get_weights())
-    F2.layers[i].set_weights(F_prev.layers[i].get_weights())
 
 # CREATE F&G for both branches
 abs_net_1 = create_abs_network(F1)
-abs_net_2 = create_abs_network(F2)
-abs_net_1.compile(optimizer=sgd, loss=absLoss)
-abs_net_2.compile(optimizer=sgd, loss=absLoss)
 
-# do not repeat layer names
-for i in range(len(abs_net_2.layers)):
-    abs_net_2.layers[i].name += '_'
-
-# Load absnet weights
-abs_net_1.load_weights("abs_comp_train_absnet_" + str(kthFold) + '_' + str(alpha) + ".h5")
-abs_net_2.load_weights("abs_comp_train_absnet_" + str(kthFold) + '_' + str(alpha) + ".h5")
-
-# Load Siamese Network
-comp_net = load_model("abs_comp_train_compnet_" + str(kthFold) + '_' + str(alpha) + ".h5",
+for alpha in [0.0,0.2,0.4,0.6,0.8,1.0]:
+    # Load model
+    comp_net = load_model("abs_comp_train_compnet_" + str(kthFold) + '_' + str(alpha) + ".h5",
                           custom_objects={'LRN': LRN, 'PoolHelper': PoolHelper, 'BTPred': BTPred, 'BTLoss': BTLoss})
 
-# Train: Iteratively train each model at each epoch, with weight of alpha
-for epoch in range(epochs):
-    abs_net_1.fit(k_img_train_abs, k_label_train_abs, batch_size=batch_size, epochs=1)
+    # Load model
+    '''abs_net_1 = load_model("abs_comp_train_absnet_" + str(kthFold) + '_' + str(alpha) + ".h5",
+                           custom_objects={'LRN': LRN, 'PoolHelper': PoolHelper, 'absLoss': absLoss,
+                                           'InvSigLayer': InvSigLayer, 'GausLayer': GausLayer, 'SigLayer': SigLayer})'''
+    abs_net_1.compile(optimizer=sgd, loss=absLoss)
+    abs_net_1.load_weights("abs_comp_train_absnet_" + str(kthFold) + '_' + str(alpha) + ".h5")
 
-    for i in range(len(abs_net_1.layers)):  # last 2 layers depends on the number of classes
-        abs_net_2.layers[i].set_weights(abs_net_1.layers[i].get_weights())
+    ###########################
+    # Test for absolute labels
+    score_layer_model = Model(inputs=abs_net_1.input, outputs=abs_net_1.get_layer('prob_modified').output)
+    score_predict = score_layer_model.predict(k_img_test_abs)
 
-    comp_net.fit([k_img_train_1, k_img_train_2], k_label_train_comp, batch_size=batch_size, epochs=1)
+    print('Results for absolute labels\n')
+    print(str(alpha) + '\tAUC:' + str(roc_auc_score(k_label_test_abs, score_predict))+'\n')
+    with open('abs_comp_label_test.txt', 'a') as file:
+        file.write('Absolute AUC for alpha:' + str(alpha) + '\tAUC:' + str(roc_auc_score(k_label_test_abs, score_predict))+'\n')
 
-    print('*********End of epoch '+str(epoch)+'\n')
+    ##########################
+    # Test for comparison labels
+    y_predict = comp_net.predict([k_img_test_1, k_img_test_2])
 
-# Save weights for F
-abs_net_1.save("abs_comp_train_absnet_" + str(kthFold) + '_' + str(alpha) + "_6epc.h5")
-comp_net.save("abs_comp_train_compnet_" + str(kthFold) + '_' + str(alpha) + "_6epc.h5")
+    print('Results for comparison labels\n')
+    print(str(alpha) + '\tAUC:' + str(roc_auc_score(k_label_test_comp, y_predict)) + '\n')
+    with open('abs_comp_label_test.txt', 'a') as file:
+        file.write('Comparison AUC for alpha:' + str(alpha) + '\tAUC:' + str(roc_auc_score(k_label_test_comp, y_predict))+'\n')
+
+
+
+
+
+

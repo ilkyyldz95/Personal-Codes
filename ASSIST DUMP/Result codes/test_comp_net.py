@@ -29,7 +29,7 @@ for kthFold in [0,1,2,3,4]:
     importer = importData(kthFold)
     k_img_test_1, k_img_test_2, k_label_test = importer.importCompTestData()
 
-    comp_net = load_model("comp_label_" + str(lr) + "_" + str(kthFold) + "_2ndRep.h5",
+    comp_net = load_model("comp_label_" + str(lr) + "_" + str(kthFold) + "_3rdRep.h5",
                           custom_objects={'LRN': LRN, 'PoolHelper': PoolHelper, 'BTPred': BTPred, 'BTLoss': BTLoss})
 
     # TEST

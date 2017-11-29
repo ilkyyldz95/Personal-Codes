@@ -23,3 +23,10 @@ After 36 iterations:
 2th fold   AUC:0.50375163827   min_estimate:[-0.31877977]   max_estimate:[ 0.06497073]
 3th fold   AUC:0.524048942664   min_estimate:[-0.26304853]   max_estimate:[ 0.56200898]
 4th fold   AUC:0.505957260499   min_estimate:[-0.48057553]   max_estimate:[ 0.43726194]
+
+After 54 iterations: Average: 0.5109993928559999
+0th fold   AUC:0.511681415929   min_estimate:[-0.16531944]   max_estimate:[ 0.45220721]
+1th fold   AUC:0.508561050541   min_estimate:[-0.22660297]   max_estimate:[ 0.41900915]
+2th fold   AUC:0.504603538663   min_estimate:[-0.22641402]   max_estimate:[ 0.08132052]
+3th fold   AUC:0.523852130417   min_estimate:[-0.32157424]   max_estimate:[ 0.51237941]
+4th fold   AUC:0.506298828731   min_estimate:[-0.487104]   max_estimate:[ 0.41914046]

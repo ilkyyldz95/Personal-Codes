@@ -28,7 +28,7 @@ for kthFold in range(5):
     k_img_test, k_label_test = importer.importAbsTestData()
 
     # Load model
-    concat_abs_net = load_model("abs_label_" + str(lr) + '_' + str(kthFold) + ".h5",
+    concat_abs_net = load_model("abs_label_" + str(lr) + '_' + str(kthFold) + "_2ndRep.h5",
                                 custom_objects={'LRN': LRN, 'PoolHelper': PoolHelper,
                                                 'InvSigLayer': InvSigLayer,
                                                 'GausLayer': GausLayer,
@@ -45,10 +45,10 @@ for kthFold in range(5):
     k_label_test[k_label_test==2]=1
 
     # SAVE RESULTS
-    with open('abs_label_test.txt', 'a') as file:
+    '''with open('abs_label_test.txt', 'a') as file:
         file.write(str(kthFold) + 'th fold' + '   AUC:' + str(roc_auc_score(k_label_test,score_predict)) +
                    '   min_estimate:' + str(min(score_predict)) + '   max_estimate:' + str(max(score_predict)))
 
     print(min(score_predict))
-    print(max(score_predict))
+    print(max(score_predict))'''
     print(str(kthFold) + 'th fold' + '   AUC:' + str(roc_auc_score(k_label_test,score_predict)))

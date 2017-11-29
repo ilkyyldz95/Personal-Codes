@@ -19,9 +19,10 @@ def absLoss(y_true, y_pred):
     return -K.log(diff)
 
 # Initialization
-lr = 1e-08
+lr = 1e-06
 batch_size = 32
 epochs = 60
+# hid_layer_dim = 1
 
 # LOAD DATA FOR ABSOLUTE LABELS
 kthFold = int(sys.argv[1])

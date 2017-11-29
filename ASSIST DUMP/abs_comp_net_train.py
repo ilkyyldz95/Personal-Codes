@@ -58,16 +58,16 @@ def BTLoss(y_true, y_pred):
     return (1-alpha) * K.log(1 + exponent)
 
 # INITIALIZE PARAMETERS
-epochs = 10
-#alpha = float(sys.argv[2]) # balance between absolute and comparison contributions
-alpha = float(0.5) # balance between absolute and comparison contributions
-#kthFold = int(sys.argv[1])
-kthFold = int(0)
+epochs = 3
+alpha = float(sys.argv[2]) # balance between absolute and comparison contributions
+#alpha = float(0.5) # balance between absolute and comparison contributions
+kthFold = int(sys.argv[1])
+#kthFold = int(0)
 
-sgd = optimizers.SGD(lr=1e-08)
+lr=1e-06
+sgd = optimizers.SGD(lr=lr)
 no_of_features = 1024
 batch_size = 32
-input_shape = (3,224,224)
 
 # LOAD DATA
 importer = importData(kthFold)
@@ -82,13 +82,16 @@ F2 = create_googlenet(no_classes=1, no_features=no_of_features)
 for i in range(len(F1.layers) - 2): #last 2 layers depends on the number of classes
     F1.layers[i].set_weights(F_prev.layers[i].get_weights())
     F2.layers[i].set_weights(F_prev.layers[i].get_weights())
-print("F loaded")
 
 # CREATE F&G for both branches
 abs_net_1 = create_abs_network(F1)
 abs_net_2 = create_abs_network(F2)
 abs_net_1.compile(optimizer=sgd, loss=absLoss)
 abs_net_2.compile(optimizer=sgd, loss=absLoss)
+
+# do not repeat layer names
+for i in range(len(abs_net_2.layers)):
+    abs_net_2.layers[i].name += '_'
 
 # CREATE TWIN NETWORKS: Siamese
 input_a = F1.input
@@ -109,6 +112,8 @@ for epoch in range(epochs):
 
     comp_net.fit([k_img_train_1, k_img_train_2], k_label_train_comp, batch_size=batch_size, epochs=1)
 
+    print('*********End of epoch '+str(epoch)+'\n')
+
 # Save weights for F
-abs_net_1.save("abs_comp_train_absnet" + str(kthFold) + ".h5")
-comp_net.save("abs_comp_train_compnet" + str(kthFold) + ".h5")
+abs_net_1.save("abs_comp_train_absnet_" + str(kthFold) + '_' + str(alpha) + ".h5")
+comp_net.save("abs_comp_train_compnet_" + str(kthFold) + '_' + str(alpha) + ".h5")

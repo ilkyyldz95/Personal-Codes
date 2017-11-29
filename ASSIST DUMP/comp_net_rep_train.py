@@ -23,7 +23,7 @@ def BTLoss(y_true, y_pred):
 # Initialization
 lr = 1e-06
 batch_size = 32
-epochs = 18
+epochs = 18 
 
 # LOAD DATA FOR COMPARISON LABELS
 kthFold = int(sys.argv[1])
@@ -32,13 +32,13 @@ importer = importData(kthFold)
 k_img_train_1, k_img_train_2, k_label_train = importer.importCompTrainData()
 
 # Load model
-comp_net = load_model("comp_label_" + str(lr) + "_" + str(kthFold) + ".h5",
+comp_net = load_model("comp_label_" + str(lr) + "_" + str(kthFold) + "_2ndRep.h5",
                       custom_objects={'LRN': LRN, 'PoolHelper': PoolHelper, 'BTPred': BTPred, 'BTLoss': BTLoss})
 
 # train
 comp_net.fit([k_img_train_1, k_img_train_2], k_label_train, batch_size=batch_size, epochs=epochs)
 
 # Save model
-comp_net.save("comp_label_" + str(lr) + "_" + str(kthFold) + "_2ndRep.h5")
+comp_net.save("comp_label_" + str(lr) + "_" + str(kthFold) + "_3rdRep.h5")
 
 
