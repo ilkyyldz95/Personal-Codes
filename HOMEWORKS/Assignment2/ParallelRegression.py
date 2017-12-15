@@ -184,8 +184,8 @@ def train(data,beta_0, lam,max_iter,eps):
 
 
         to  minimize F given by
-  
-             F(β) = 1/n Σ_{(x,y) in data} f(β;x,y) + λ ||β ||_2^2   
+
+             F(β) = 1/n Σ_{(x,y) in data} f(β;x,y) + λ ||β ||_2^2
 
 	where
              - data: an rdd containing pairs of the form (x,y)
@@ -199,20 +199,20 @@ def train(data,beta_0, lam,max_iter,eps):
 	The function performs gradient descent with a gain found through backtracking
         line search. That is it computes
 
-                   
-	           β_k+1 = β_k - γ_k ∇F(β_k) 
-		
+
+	           β_k+1 = β_k - γ_k ∇F(β_k)
+
 	where the gain γ_k is given by
-	
+
 		  γ_k = lineSearch(F,β_κ,∇F(β_k))
 
-	and terminates after max_iter iterations or when ||∇F(β_k)||_2<ε.   
+	and terminates after max_iter iterations or when ||∇F(β_k)||_2<ε.
 
 	The function returns:
-	     -beta: the trained β, 
+	     -beta: the trained β,
 	     -gradNorm: the norm of the gradient at the trained β, and
              -k: the number of iterations performed
-    """ 	
+    """
     # Initializations
     t_start = time()
     # find F(beta)
