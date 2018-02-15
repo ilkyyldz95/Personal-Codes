@@ -6,6 +6,7 @@ from keras.models import Sequential, Model
 from keras.layers import Dense, Dropout, Input, Lambda
 from keras.optimizers import RMSprop
 from keras import backend as K
+from sklearn.metrics import roc_auc_score
 
 '''' TRAIN FOR COMPARisON LABELS'''
 
@@ -127,9 +128,13 @@ model.fit([tr_pairs[:, 0], tr_pairs[:, 1]], tr_y,
 
 # Training accuracy
 pred = model.predict([tr_pairs[:, 0], tr_pairs[:, 1]])
-tr_acc = compute_comp_accuracy(pred, tr_y)
+tr_acc = roc_auc_score(tr_y, pred)
 print('* Accuracy on training set: %0.2f%%' % (100 * tr_acc))
-
+# Test accuracy
+pred = model.predict([te_pairs[:, 0], te_pairs[:, 1]])
+te_acc = roc_auc_score(te_y, pred)
+print('* Accuracy on test set: %0.2f%%' % (100 * te_acc))
+print()
 
 '''# serialize model to JSON
 model_json = model.to_json()
