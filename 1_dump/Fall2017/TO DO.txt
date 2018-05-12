@@ -1,0 +1,9 @@
+*only absolute AUC vs. number of absolute labels (with and without rotations) ++
+*only comparison AUC vs. number of comparison labels (with and without rotations) ++
+*add comparisons to the optimal number of labels setting
+!!!0 is plus, 2 is normal
+
+Peng:
+*change regularization with the max number of absolute labels
+*different loss functions ++
+*balancing the data ++

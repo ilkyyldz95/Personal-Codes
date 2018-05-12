@@ -1,0 +1,24 @@
+***Fold 0, 30 epochs
+***36063 weights to be learned for absolute network
+
+Without rotations:
+
+15000 training samples.   AUC:0.516252035398
+14000 training samples.   AUC:0.500798584071
+12000 training samples.   AUC:0.507722477876
+10000 training samples.   AUC:0.492948672566
+8000 training samples.   AUC:0.509580176991
+6000 training samples.   AUC:0.51534300885
+4000 training samples.   AUC:0.503616283186
+
+With rotations:
+
+60000 training samples.   AUC:0.475139115044
+55000 training samples.   AUC:0.475028672566
+50000 training samples.   AUC:0.491463362832
+40000 training samples.   AUC:0.507371327434
+30000 training samples.   AUC:0.49902300885
+20000 training samples.   AUC:0.49246300885
+14000 training samples.   AUC:0.512191150442
+7000 training samples.   AUC:0.495582300885
+

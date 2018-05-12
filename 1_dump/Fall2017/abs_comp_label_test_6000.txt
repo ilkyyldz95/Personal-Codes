@@ -1,0 +1,45 @@
+*Alpha = 0: only comparison loss
+Alpha = 1: only absolute loss
+*2 hours for loading the whole data
+*6000 absolute labels
+
+After 30 epochs and normalized loss functions, same for all alpha:
+
+Absolute AUC for comp data size:14000.	AUC:0.480700270817
+Comparison AUC for comp data size:14000.	AUC:0.528516814159
+
+Absolute AUC for comp data size:7000.	AUC:0.535158047976
+Comparison AUC for comp data size:7000.	AUC:0.491810265487
+
+After 30 epochs and standard loss functions:
+
+Absolute AUC for alpha:0.0 and comp data size:7000.	AUC:0.533980582524
+Comparison AUC for alpha:0.0 and comp data size:7000.	AUC:0.491473274336
+
+Absolute AUC for alpha:0.3 and comp data size:7000.	AUC:0.538101711607
+Comparison AUC for alpha:0.3 and comp data size:7000.	AUC:0.491725309735
+
+Absolute AUC for alpha:0.5 and comp data size:7000.	AUC:0.540247909999
+Comparison AUC for alpha:0.5 and comp data size:7000.	AUC:0.492416283186
+
+Absolute AUC for alpha:0.7 and comp data size:7000.	AUC:0.5418856574
+Comparison AUC for alpha:0.7 and comp data size:7000.	AUC:0.493076106195
+
+Absolute AUC for alpha:1.0 and comp data size:7000.	AUC:0.543378897678
+Comparison AUC for alpha:1.0 and comp data size:7000.	AUC:0.493163893805
+
+
+Absolute AUC for alpha:0.0 and comp data size:14000.	AUC:0.481181961229
+Comparison AUC for alpha:0.0 and comp data size:14000.	AUC:0.529193628319
+
+Absolute AUC for alpha:0.3 and comp data size:14000.	AUC:0.484393230644
+Comparison AUC for alpha:0.3 and comp data size:14000.	AUC:0.529757168142
+
+Absolute AUC for alpha:0.5 and comp data size:14000.	AUC:0.486673231929
+Comparison AUC for alpha:0.5 and comp data size:14000.	AUC:0.530581238938
+
+Absolute AUC for alpha:0.7 and comp data size:14000.	AUC:0.488610697809
+Comparison AUC for alpha:0.7 and comp data size:14000.	AUC:0.531156106195
+
+Absolute AUC for alpha:1.0 and comp data size:14000.	AUC:0.491147600647
+Comparison AUC for alpha:1.0 and comp data size:14000.	AUC:0.53153840708
