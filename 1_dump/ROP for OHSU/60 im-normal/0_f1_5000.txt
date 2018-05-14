@@ -1,0 +1,91 @@
+
+
+Alpha: 0.0 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+F1 score on absolute: 0.549575070822
+
+Alpha: 0.0 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+F1 score on absolute: 0.62380405664
+
+Alpha: 0.0 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 60
+F1 score on absolute: 0.594369134515
+
+Alpha: 0.0 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 60
+F1 score on absolute: 0.671083767156
+
+Alpha: 0.25 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+F1 score on absolute: 0.615026208503
+
+Alpha: 0.0 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 60
+F1 score on absolute: 0.614372469636
+
+Alpha: 0.0 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 60
+F1 score on absolute: 0.610923151281
+
+Alpha: 0.75 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+F1 score on absolute: 0.621683967705
+
+Alpha: 0.75 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 60
+F1 score on absolute: 0.300687547746
+
+Alpha: 0.75 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 60
+F1 score on absolute: 0.574545454545
+
+Alpha: 1.0 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+F1 score on absolute: 0
+
+Alpha: 1.0 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+F1 score on absolute: 0.300687547746
+
+Alpha: 0.75 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+F1 score on absolute: 0.300687547746
+
+Alpha: 1.0 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 60
+F1 score on absolute: 0.475599892154
+
+Alpha: 1.0 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 60
+F1 score on absolute: 0.300687547746
+
+Alpha: 0.25 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+F1 score on absolute: 0.499104477612
+
+Alpha: 0.25 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 60
+F1 score on absolute: 0.64627813041
+
+Alpha: 0.25 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 60
+F1 score on absolute: 0.596256684492
+
+Alpha: 0.25 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 60
+F1 score on absolute: 0.588068181818
+
+Alpha: 0.5 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+F1 score on absolute: 0.639880952381
+
+Alpha: 0.25 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 60
+F1 score on absolute: 0.596153846154
+
+Alpha: 0.5 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+F1 score on absolute: 0.300687547746
+
+Alpha: 1.0 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 60
+F1 score on absolute: 0.509206349206
+
+Alpha: 1.0 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 60
+F1 score on absolute: 0.507361268403
+
+Alpha: 0.5 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 60
+F1 score on absolute: 0.602816901408
+
+Alpha: 0.5 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+F1 score on absolute: 0.639880952381
+
+Alpha: 0.5 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 60
+F1 score on absolute: 0.595146871009
+
+Alpha: 0.5 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 60
+F1 score on absolute: 0.594271056007
+
+Alpha: 0.5 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+F1 score on absolute: 0.300687547746
+
+Alpha: 0.5 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 60
+F1 score on absolute: 0.601960784314

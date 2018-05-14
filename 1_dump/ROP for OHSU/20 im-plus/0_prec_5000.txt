@@ -1,0 +1,181 @@
+
+
+Alpha: 0.0 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 10
+Precision on absolute: 0.0745401742498
+
+Alpha: 0.0 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 10
+Precision on absolute: 0.0811831340466
+
+Alpha: 0.0 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 10
+Precision on absolute: 0.0829610721123
+
+Alpha: 0.0 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 10
+Precision on absolute: 0.0712111990262
+
+Alpha: 0.0 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 10
+Precision on absolute: 0.0813880126183
+
+Alpha: 0.0 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 10
+Precision on absolute: 0.0672121566335
+
+Alpha: 0.0 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 20
+Precision on absolute: 0.143564356436
+
+Alpha: 0.0 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 20
+Precision on absolute: 0.0615496017379
+
+Alpha: 0.0 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 20
+Precision on absolute: 0.145855194124
+
+Alpha: 0.0 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 20
+Precision on absolute: 0.145052833814
+
+Alpha: 0.0 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 20
+Precision on absolute: 0.14570230608
+
+Alpha: 0.0 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 20
+Precision on absolute: 0.157777777778
+
+Alpha: 0.25 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 10
+Precision on absolute: 0.255813953488
+
+Alpha: 0.25 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 10
+Precision on absolute: 0.65306122449
+
+Alpha: 0.25 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 10
+Precision on absolute: 0.268292682927
+
+Alpha: 0.25 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 10
+Precision on absolute: 0.484848484848
+
+Alpha: 0.25 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 10
+Precision on absolute: 0.268292682927
+
+Alpha: 0.25 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 10
+Precision on absolute: 0.48275862069
+
+Alpha: 0.5 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 10
+Precision on absolute: 0.375
+
+Alpha: 0.5 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 10
+Precision on absolute: 0.517857142857
+
+Alpha: 0.5 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 10
+Precision on absolute: 0.407407407407
+
+Alpha: 0.5 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 10
+Precision on absolute: 0.486111111111
+
+Alpha: 0.5 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 10
+Precision on absolute: 0.384615384615
+
+Alpha: 0.5 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 10
+Precision on absolute: 0.467532467532
+
+Alpha: 0.75 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 10
+Precision on absolute: 0.4375
+
+Alpha: 0.75 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 10
+Precision on absolute: 0
+
+Alpha: 0.75 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 10
+Precision on absolute: 0.446808510638
+
+Alpha: 0.75 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 10
+Precision on absolute: 0.592592592593
+
+Alpha: 0.75 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 10
+Precision on absolute: 0.466666666667
+
+Alpha: 0.75 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 10
+Precision on absolute: 0.60396039604
+
+Alpha: 1.0 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 10
+Precision on absolute: 0.43137254902
+
+Alpha: 1.0 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 10
+Precision on absolute: 0.0
+
+Alpha: 1.0 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 10
+Precision on absolute: 0.413043478261
+
+Alpha: 1.0 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 10
+Precision on absolute: 0.666666666667
+
+Alpha: 1.0 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 10
+Precision on absolute: 0.422222222222
+
+Alpha: 1.0 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 10
+Precision on absolute: 0.627118644068
+
+Alpha: 0.25 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 20
+Precision on absolute: 0.424657534247
+
+Alpha: 0.25 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 20
+Precision on absolute: 0
+
+Alpha: 0.25 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 20
+Precision on absolute: 0.388489208633
+
+Alpha: 0.25 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 20
+Precision on absolute: 0.48275862069
+
+Alpha: 0.25 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 20
+Precision on absolute: 0.392857142857
+
+Alpha: 0.25 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 20
+Precision on absolute: 0.555555555556
+
+Alpha: 0.5 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 20
+Precision on absolute: 0.478873239437
+
+Alpha: 0.5 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 20
+Precision on absolute: 1.0
+
+Alpha: 0.5 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 20
+Precision on absolute: 0.46
+
+Alpha: 0.5 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 20
+Precision on absolute: 0.50495049505
+
+Alpha: 0.5 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 20
+Precision on absolute: 0.46
+
+Alpha: 0.5 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 20
+Precision on absolute: 0.523076923077
+
+Alpha: 0.75 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 20
+Precision on absolute: 0.462686567164
+
+Alpha: 0.75 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 20
+Precision on absolute: 0
+
+Alpha: 0.75 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 20
+Precision on absolute: 0.45652173913
+
+Alpha: 0.75 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 20
+Precision on absolute: 0.452631578947
+
+Alpha: 0.75 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 20
+Precision on absolute: 0.256906077348
+
+Alpha: 0.75 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 20
+Precision on absolute: 0.267477203647
+
+Alpha: 1.0 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 20
+Precision on absolute: 0.293103448276
+
+Alpha: 1.0 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 20
+Precision on absolute: 0
+
+Alpha: 1.0 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 20
+Precision on absolute: 0.313725490196
+
+Alpha: 1.0 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 20
+Precision on absolute: 0.738095238095
+
+Alpha: 1.0 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 20
+Precision on absolute: 0.316326530612
+
+Alpha: 1.0 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 20
+Precision on absolute: 0.504273504274

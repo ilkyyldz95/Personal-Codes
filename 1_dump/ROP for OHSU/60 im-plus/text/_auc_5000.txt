@@ -1,0 +1,85 @@
+
+
+Alpha: 0.25 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 60
+AUC on absolute: 0.952777406172
+
+Alpha: 0.75 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+AUC on absolute: 0.5
+
+Alpha: 0.0 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+AUC on absolute: 0.821577761763
+
+Alpha: 0.25 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 60
+AUC on absolute: 0.947972182784
+
+Alpha: 0.0 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 60
+AUC on absolute: 0.957356069858
+
+Alpha: 0.75 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 60
+AUC on absolute: 0.954231703686
+
+Alpha: 0.5 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+AUC on absolute: 0.972116973853
+
+Alpha: 0.25 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+AUC on absolute: 0.971960539773
+
+Alpha: 0.5 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 60
+AUC on absolute: 0.963307038023
+
+Alpha: 0.25 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 60
+AUC on absolute: 0.969218088527
+
+Alpha: 0.5 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 60
+AUC on absolute: 0.955038687766
+
+Alpha: 0.75 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+AUC on absolute: 0.969445727084
+
+Alpha: 0.0 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+AUC on absolute: 0.970511636538
+
+Alpha: 0.25 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 60
+AUC on absolute: 0.934345156154
+
+Alpha: 0.5 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 60
+AUC on absolute: 0.950430894976
+
+Alpha: 0.25 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+AUC on absolute: 0.789463463472
+
+Alpha: 0.0 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 60
+AUC on absolute: 0.962018344863
+
+Alpha: 0.0 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 60
+AUC on absolute: 0.954319630427
+
+Alpha: 0.75 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 60
+AUC on absolute: 0.970971229076
+
+Alpha: 0.5 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 60
+AUC on absolute: 0.946394895718
+
+Alpha: 0.0 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 60
+AUC on absolute: 0.970797533304
+
+Alpha: 0.5 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+AUC on absolute: 0.5
+
+Alpha: 1.0 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+AUC on absolute: 0.453560655426
+
+Alpha: 1.0 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 60
+AUC on absolute: 0.926361623807
+
+Alpha: 1.0 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 60
+AUC on absolute: 0.923407716839
+
+Alpha: 1.0 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+AUC on absolute: 0.5
+
+Alpha: 1.0 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 60
+AUC on absolute: 0.912847877028
+
+Alpha: 1.0 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 60
+AUC on absolute: 0.968813517631

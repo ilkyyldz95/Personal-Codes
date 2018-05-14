@@ -1,0 +1,40 @@
+
+
+Alpha: 0.25 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 20
+Recall on absolute: 0.0
+
+Alpha: 0.0 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 20
+Recall on absolute: 0.825581395349
+
+Alpha: 0.75 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 20
+Recall on absolute: 0.18023255814
+
+Alpha: 0.75 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 20
+Recall on absolute: 0.0
+
+Alpha: 0.25 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 20
+Recall on absolute: 0.325581395349
+
+Alpha: 0.25 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 20
+Recall on absolute: 0.232558139535
+
+Alpha: 0.5 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 20
+Recall on absolute: 0.0697674418605
+
+Alpha: 0.0 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 20
+Recall on absolute: 0.988372093023
+
+Alpha: 0.5 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 20
+Recall on absolute: 0.296511627907
+
+Alpha: 0.75 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 20
+Recall on absolute: 0.540697674419
+
+Alpha: 1.0 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 20
+Recall on absolute: 0.18023255814
+
+Alpha: 1.0 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 20
+Recall on absolute: 0.343023255814
+
+Alpha: 1.0 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 20
+Recall on absolute: 0.0

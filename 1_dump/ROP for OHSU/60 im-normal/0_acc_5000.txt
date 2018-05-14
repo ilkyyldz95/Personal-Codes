@@ -1,0 +1,121 @@
+
+
+Alpha: 0.0 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+Accuracy on absolute: 0.799856140982
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.0 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+Accuracy on absolute: 0.823233231433
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.0 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 60
+Accuracy on absolute: 0.860097104837
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.0 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 60
+Accuracy on absolute: 0.875022477972
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.25 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+Accuracy on absolute: 0.881136486243
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.0 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 60
+Accuracy on absolute: 0.862974285201
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.0 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 60
+Accuracy on absolute: 0.855241862974
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.75 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+Accuracy on absolute: 0.882035605107
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.75 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 60
+Accuracy on absolute: 0.17694659234
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.75 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 60
+Accuracy on absolute: 0.789606185938
+N_pos: 984 & N_neg: 4577
+
+Alpha: 1.0 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+Accuracy on absolute: 0.82305340766
+N_pos: 984 & N_neg: 4577
+
+Alpha: 1.0 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+Accuracy on absolute: 0.17694659234
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.75 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+Accuracy on absolute: 0.17694659234
+N_pos: 984 & N_neg: 4577
+
+Alpha: 1.0 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 60
+Accuracy on absolute: 0.650242762093
+N_pos: 984 & N_neg: 4577
+
+Alpha: 1.0 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 60
+Accuracy on absolute: 0.17694659234
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.25 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+Accuracy on absolute: 0.849127854702
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.25 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 60
+Accuracy on absolute: 0.889768027333
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.25 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 60
+Accuracy on absolute: 0.837079661931
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.25 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 60
+Accuracy on absolute: 0.843553317749
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.5 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+Accuracy on absolute: 0.869447941018
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.25 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 60
+Accuracy on absolute: 0.826290235569
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.5 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+Accuracy on absolute: 0.17694659234
+N_pos: 984 & N_neg: 4577
+
+Alpha: 1.0 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 60
+Accuracy on absolute: 0.721992447402
+N_pos: 984 & N_neg: 4577
+
+Alpha: 1.0 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 60
+Accuracy on absolute: 0.687106635497
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.5 & Lambda: 0.002 & Learning rate: 0.001 & Num of im: 60
+Accuracy on absolute: 0.822513936342
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.5 & Lambda: 0.02 & Learning rate: 0.001 & Num of im: 60
+Accuracy on absolute: 0.869447941018
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.5 & Lambda: 0.002 & Learning rate: 0.01 & Num of im: 60
+Accuracy on absolute: 0.885991728106
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.5 & Lambda: 0.0002 & Learning rate: 0.001 & Num of im: 60
+Accuracy on absolute: 0.829347239705
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.5 & Lambda: 0.02 & Learning rate: 0.01 & Num of im: 60
+Accuracy on absolute: 0.17694659234
+N_pos: 984 & N_neg: 4577
+
+Alpha: 0.5 & Lambda: 0.0002 & Learning rate: 0.01 & Num of im: 60
+Accuracy on absolute: 0.853983096565
+N_pos: 984 & N_neg: 4577
